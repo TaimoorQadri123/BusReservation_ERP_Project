@@ -1,0 +1,22 @@
+﻿@model BusReservationERP.Models.City
+
+@{
+    ViewData["Title"] = "Add City";
+}
+
+<h2>Add New City</h2>
+
+<form asp-controller="City" asp-action="Create" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="CityName" class="form-label"></label>
+        <input asp-for="CityName" class="form-control" />
+        <span asp-validation-for="CityName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save City</button>
+    <a asp-controller="City" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>

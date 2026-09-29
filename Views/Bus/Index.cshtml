@@ -1,0 +1,35 @@
+﻿@model List<BusReservationERP.Models.Bus>
+
+@{
+    ViewData["Title"] = "Bus List";
+}
+
+<h2>Bus List</h2>
+
+<a asp-controller="Bus" asp-action="Create" class="btn btn-primary mb-3">+ Add New Bus</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Bus Number</th>
+            <th>Type</th>
+            <th>Total Seats</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model)
+        {
+            <tr>
+                <td>@bus.BusNumber</td>
+                <td>@bus.BusType</td>
+                <td>@bus.TotalSeats</td>
+                <td>@bus.Status</td>
+                <td>
+                    <a asp-controller="Bus" asp-action="Edit" asp-route-id="@bus.BusId" class="btn btn-sm btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

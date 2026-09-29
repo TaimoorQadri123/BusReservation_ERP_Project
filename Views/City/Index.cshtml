@@ -1,0 +1,25 @@
+﻿@model List<BusReservationERP.Models.City>
+
+@{
+    ViewData["Title"] = "City List";
+}
+
+<h2>City List</h2>
+
+<a asp-controller="City" asp-action="Create" class="btn btn-primary mb-3">+ Add New City</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>City Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in Model)
+        {
+            <tr>
+                <td>@city.CityName</td>
+            </tr>
+        }
+    </tbody>
+</table>

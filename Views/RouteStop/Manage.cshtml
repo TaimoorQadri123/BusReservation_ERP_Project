@@ -1,0 +1,64 @@
+﻿@model BusReservationERP.Models.BusRoute
+
+@{
+    ViewData["Title"] = "Manage Stops";
+}
+
+<h2>Manage Stops — @ViewBag.RouteName</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Order</th>
+            <th>Stop Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Stops != null)
+        {
+            @foreach (var stop in Model.Stops)
+            {
+                <tr>
+                    <td>@stop.StopOrder</td>
+                    <td>@stop.StopName</td>
+                    <td>
+                        <form asp-controller="RouteStop" asp-action="Delete" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@stop.RouteStopId" />
+                            <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h4>Add New Stop</h4>
+
+<form asp-controller="RouteStop" asp-action="Create" method="post">
+
+    <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
+
+    <div class="mb-3">
+        <label class="form-label">Stop Name</label>
+        <input type="text" name="stopName" class="form-control" placeholder="e.g. Hyderabad" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Stop Order</label>
+        <input type="number" name="stopOrder" class="form-control" placeholder="e.g. 2" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Stop</button>
+    <a asp-controller="Route" asp-action="Index" class="btn btn-secondary">Back to Routes</a>
+
+</form>

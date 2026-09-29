@@ -1,0 +1,67 @@
+﻿@model BusReservationERP.Models.BusRoute
+
+@{
+    ViewData["Title"] = "Add Route";
+    var cities = ViewBag.CityList as List<BusReservationERP.Models.City>;
+}
+
+<h2>Add New Route</h2>
+
+<form asp-controller="Route" asp-action="Create" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Origin City</label>
+        <select asp-for="OriginCityId" id="originCity" class="form-control">
+            <option value="">-- Select Origin --</option>
+            @foreach (var city in cities!)
+            {
+                <option value="@city.CityId">@city.CityName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Destination City</label>
+        <select asp-for="DestinationCityId" id="destinationCity" class="form-control">
+            <option value="">-- Select Destination --</option>
+            @foreach (var city in cities!)
+            {
+                <option value="@city.CityId">@city.CityName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Route</button>
+    <a asp-controller="Route" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    <script>
+        const originSelect = document.getElementById("originCity");
+        const destinationSelect = document.getElementById("destinationCity");
+
+        function filterDestinationOptions() {
+            const selectedOrigin = originSelect.value;
+
+            for (let option of destinationSelect.options) {
+                if (option.value === "") continue; // "-- Select --" hamesha dikhega
+
+                if (option.value === selectedOrigin) {
+                    option.style.display = "none"; // Origin wali city hide karo
+                } else {
+                    option.style.display = "block";
+                }
+            }
+
+            // Agar pehle se Destination mein wahi city selected thi jo ab Origin bani, to reset kar do
+            if (destinationSelect.value === selectedOrigin) {
+                destinationSelect.value = "";
+            }
+        }
+
+        originSelect.addEventListener("change", filterDestinationOptions);
+    </script>
+}

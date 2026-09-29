@@ -1,0 +1,58 @@
+﻿@model List<BusReservationERP.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking List";
+}
+
+<h2>Booking List</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<a asp-controller="Booking" asp-action="Create" class="btn btn-primary mb-3">+ New Booking</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Passenger</th>
+            <th>Phone</th>
+            <th>Seat</th>
+            <th>Trip</th>
+            <th>Boarding</th>
+            <th>Drop</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.PassengerName</td>
+                <td>@booking.PassengerPhone</td>
+                <td>@booking.SeatNumber</td>
+                <td>
+                    @booking.Trip?.Bus?.BusNumber
+                    (@booking.Trip?.DepartureDate.ToString("dd-MMM-yyyy") @booking.Trip?.DepartureTime)
+                </td>
+                <td>@booking.BoardingStop?.StopName</td>
+                <td>@booking.DropStop?.StopName</td>
+                <td>@booking.BookingStatus</td>
+                <td>
+                    @if (booking.BookingStatus != "Cancelled")
+                    {
+                        <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@booking.BookingId" />
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Do you want to cancel this booking?');">
+                                Cancel
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

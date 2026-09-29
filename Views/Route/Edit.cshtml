@@ -1,0 +1,65 @@
+﻿@model BusReservationERP.Models.BusRoute
+
+@{
+    ViewData["Title"] = "Edit Route";
+    var cities = ViewBag.CityList as List<BusReservationERP.Models.City>;
+}
+
+<h2>Edit Route</h2>
+
+<form asp-controller="Route" asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="RouteId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Origin City</label>
+        <select asp-for="OriginCityId" id="originCity" class="form-control">
+            @foreach (var city in cities!)
+            {
+                <option value="@city.CityId">@city.CityName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Destination City</label>
+        <select asp-for="DestinationCityId" id="destinationCity" class="form-control">
+            @foreach (var city in cities!)
+            {
+                <option value="@city.CityId">@city.CityName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Route</button>
+    <a asp-controller="Route" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    <script>
+        const originSelect = document.getElementById("originCity");
+        const destinationSelect = document.getElementById("destinationCity");
+
+        function filterDestinationOptions() {
+            const selectedOrigin = originSelect.value;
+
+            for (let option of destinationSelect.options) {
+                if (option.value === selectedOrigin) {
+                    option.style.display = "none";
+                } else {
+                    option.style.display = "block";
+                }
+            }
+
+            if (destinationSelect.value === selectedOrigin) {
+                destinationSelect.value = "";
+            }
+        }
+
+        originSelect.addEventListener("change", filterDestinationOptions);
+        filterDestinationOptions(); // Page load hote hi bhi ek dafa chala do
+    </script>
+}

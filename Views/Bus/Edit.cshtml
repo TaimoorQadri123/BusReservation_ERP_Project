@@ -1,0 +1,47 @@
+﻿@model BusReservationERP.Models.Bus
+
+@{
+    ViewData["Title"] = "Edit Bus";
+}
+
+<h2>Edit Bus</h2>
+
+<form asp-controller="Bus" asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="BusId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="BusNumber" class="form-label"></label>
+        <input asp-for="BusNumber" class="form-control" />
+        <span asp-validation-for="BusNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BusType" class="form-label"></label>
+        <select asp-for="BusType" class="form-control">
+            <option value="AC">AC</option>
+            <option value="Non-AC">Non-AC</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TotalSeats" class="form-label"></label>
+        <input asp-for="TotalSeats" class="form-control" />
+        <span asp-validation-for="TotalSeats" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" class="form-control">
+            <option value="Active">Active</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Bus</button>
+    <a asp-controller="Bus" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>

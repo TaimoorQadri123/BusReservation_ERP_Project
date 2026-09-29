@@ -1,0 +1,32 @@
+﻿@model List<BusReservationERP.Models.BusRoute>
+
+@{
+    ViewData["Title"] = "Route List";
+}
+
+<h2>Route List</h2>
+
+<a asp-controller="Route" asp-action="Create" class="btn btn-primary mb-3">+ Add New Route</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var route in Model)
+        {
+            <tr>
+                <td>@route.OriginCity?.CityName</td>
+                <td>@route.DestinationCity?.CityName</td>
+                <td>
+                    <a asp-controller="Route" asp-action="Edit" asp-route-id="@route.RouteId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-controller="RouteStop" asp-action="Manage" asp-route-routeId="@route.RouteId" class="btn btn-sm btn-info">Manage Stops</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

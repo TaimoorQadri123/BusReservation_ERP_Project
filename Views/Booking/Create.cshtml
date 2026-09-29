@@ -1,0 +1,150 @@
+﻿@model BusReservationERP.ViewModels.BookingViewModel
+
+@{
+    ViewData["Title"] = "New Booking";
+}
+
+<h2>New Passenger Booking</h2>
+
+<form asp-controller="Booking" asp-action="Create" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Select Trip</label>
+        <select asp-for="TripId" id="tripSelect" class="form-control">
+            <option value="">-- Select Trip --</option>
+            @foreach (var trip in Model.TripList!)
+            {
+                <option value="@trip.TripId">
+                    @trip.Bus?.BusNumber | @trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName
+                    | @trip.DepartureDate.ToString("dd-MMM-yyyy") @trip.DepartureTime
+                    | Seats Left: @trip.AvailableSeats
+                </option>
+            }
+        </select>
+        <span asp-validation-for="TripId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Boarding Stop</label>
+        <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
+            <option value="">-- Pehle Trip Select Karein --</option>
+        </select>
+        <span asp-validation-for="BoardingStopId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Drop Stop</label>
+        <select asp-for="DropStopId" id="dropSelect" class="form-control">
+            <option value="">-- Pehle Boarding Select Karein --</option>
+        </select>
+        <span asp-validation-for="DropStopId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PassengerName" class="form-label"></label>
+        <input asp-for="PassengerName" class="form-control" />
+        <span asp-validation-for="PassengerName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PassengerPhone" class="form-label"></label>
+        <input asp-for="PassengerPhone" class="form-control" />
+        <span asp-validation-for="PassengerPhone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Seat Number</label>
+        <select asp-for="SeatNumber" id="seatSelect" class="form-control">
+            <option value="">-- Pehle Trip Select Karein --</option>
+        </select>
+        <span asp-validation-for="SeatNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Booking</button>
+    <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    <script>
+        const tripSelect = document.getElementById("tripSelect");
+        const boardingSelect = document.getElementById("boardingSelect");
+        const dropSelect = document.getElementById("dropSelect");
+        const seatSelect = document.getElementById("seatSelect");
+
+        tripSelect.addEventListener("change", function() {
+            const tripId = tripSelect.value;
+
+            boardingSelect.innerHTML = '<option value="">-- Loading... --</option>';
+            dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+            seatSelect.innerHTML = '<option value="">-- Loading... --</option>';
+
+            if (!tripId) {
+                boardingSelect.innerHTML = '<option value="">-- Pehle Trip Select Karein --</option>';
+                seatSelect.innerHTML = '<option value="">-- Pehle Trip Select Karein --</option>';
+                return;
+            }
+
+            // Stops load karo
+            fetch(`/Booking/GetStopsForTrip?tripId=${tripId}`)
+                .then(response => response.json())
+                .then(stops => {
+                    let optionsHtml = '<option value="">-- Select Stop --</option>';
+
+                    stops.forEach(stop => {
+                        // data-order attribute mein StopOrder save kar rahe hain, baad mein filter ke liye
+                        optionsHtml += `<option value="${stop.routeStopId}" data-order="${stop.stopOrder}">${stop.stopName}</option>`;
+                    });
+
+                    boardingSelect.innerHTML = optionsHtml;
+                    dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+                })
+                .catch(() => {
+                    boardingSelect.innerHTML = '<option value="">-- Error Loading Stops --</option>';
+                });
+
+            // Available seats load karo
+            fetch(`/Booking/GetAvailableSeats?tripId=${tripId}`)
+                .then(response => response.json())
+                .then(seats => {
+                    let seatOptionsHtml = '<option value="">-- Select Seat --</option>';
+
+                    seats.forEach(seatNumber => {
+                        seatOptionsHtml += `<option value="${seatNumber}">Seat ${seatNumber}</option>`;
+                    });
+
+                    seatSelect.innerHTML = seatOptionsHtml;
+                })
+                .catch(() => {
+                    seatSelect.innerHTML = '<option value="">-- Error Loading Seats --</option>';
+                });
+        });
+
+        // Boarding select hone pe, Drop dropdown ko filter karo (sirf aage wale stops dikhao)
+        boardingSelect.addEventListener("change", function() {
+            const selectedOption = boardingSelect.options[boardingSelect.selectedIndex];
+            const boardingOrder = parseInt(selectedOption.getAttribute("data-order"));
+
+            if (!boardingSelect.value) {
+                dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+                return;
+            }
+
+            let dropOptionsHtml = '<option value="">-- Select Drop Stop --</option>';
+
+            // Boarding dropdown ke saare options le kar, sirf unko dikhao jinka order boarding se bada hai
+            for (let option of boardingSelect.options) {
+                if (option.value === "") continue;
+
+                const optOrder = parseInt(option.getAttribute("data-order"));
+                if (optOrder > boardingOrder) {
+                    dropOptionsHtml += `<option value="${option.value}">${option.text}</option>`;
+                }
+            }
+
+            dropSelect.innerHTML = dropOptionsHtml;
+        });
+    </script>
+}

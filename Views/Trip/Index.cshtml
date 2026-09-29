@@ -1,0 +1,65 @@
+﻿@model List<BusReservationERP.Models.Trip>
+
+@{
+    ViewData["Title"] = "Trip List";
+}
+
+<h2>Trip List</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<a asp-controller="Trip" asp-action="Create" class="btn btn-primary mb-3">+ Add New Trip</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Bus Number</th>
+            <th>Route</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Fare</th>
+            <th>Available Seats</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trip in Model)
+        {
+            <tr>
+                <td>@trip.Bus?.BusNumber</td>
+                <td>@trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName</td>
+                <td>@trip.DepartureDate.ToString("dd-MMM-yyyy")</td>
+                <td>@trip.DepartureTime</td>
+                <td>@trip.Fare</td>
+                <td>@trip.AvailableSeats</td>
+                <td>@trip.Status</td>
+                <td>
+                    @if (trip.Status != "Cancelled")
+                    {
+                        <a asp-controller="Trip" asp-action="Edit" asp-route-id="@trip.TripId" class="btn btn-sm btn-warning">Edit</a>
+
+                        <form asp-controller="Trip" asp-action="Cancel" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@trip.TripId" />
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Kya aap is trip ko cancel karna chahte hain?');">
+                                Cancel
+                            </button>
+                        </form>
+                    }
+
+                    <form asp-controller="Trip" asp-action="Delete" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@trip.TripId" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Kya aap is trip ko poori tarah delete karna chahte hain? Ye wapas nahi ho sakta.');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
