@@ -4,66 +4,170 @@
     ViewData["Title"] = "New Booking";
 }
 
+<style>
+    .seat-legend { display: flex; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+    .legend-box { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
+    .legend-available { background-color: #28a745; }
+    .legend-booked { background-color: #dc3545; }
+    .legend-selected { background-color: #007bff; }
+
+    .seat-map-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        position: sticky;
+        top: 20px;
+    }
+
+    .seat-map-scroll-area {
+        max-height: 480px;
+        overflow-y: auto;
+        padding-right: 6px;
+    }
+
+    .seat-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 30px 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .seat-btn {
+        height: 42px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .seat-available { background-color: #28a745; }
+    .seat-available:hover { background-color: #218838; }
+    .seat-booked { background-color: #dc3545; cursor: not-allowed; opacity: 0.8; }
+    .seat-selected { background-color: #007bff !important; box-shadow: 0 0 0 2px #0056b3; }
+
+    .driver-box {
+        background: #e2e3e5;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: bold;
+        width: fit-content;
+        margin-bottom: 15px;
+    }
+
+    #selectedSeatsSummary {
+        background: #e7f1ff;
+        border: 1px solid #b6d4fe;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-top: 12px;
+        font-size: 14px;
+    }
+
+    @@media (max-width: 767px) {
+        .seat-map-card {
+            position: static;
+            margin-top: 20px;
+        }
+    }
+</style>
+
 <h2>New Passenger Booking</h2>
 
 <form asp-controller="Booking" asp-action="Create" method="post">
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="mb-3">
-        <label class="form-label">Select Trip</label>
-        <select asp-for="TripId" id="tripSelect" class="form-control">
-            <option value="">-- Select Trip --</option>
-            @foreach (var trip in Model.TripList!)
-            {
-                <option value="@trip.TripId">
-                    @trip.Bus?.BusNumber | @trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName
-                    | @trip.DepartureDate.ToString("dd-MMM-yyyy") @trip.DepartureTime
-                    | Seats Left: @trip.AvailableSeats
-                </option>
-            }
-        </select>
-        <span asp-validation-for="TripId" class="text-danger"></span>
-    </div>
+    <div class="row">
 
-    <div class="mb-3">
-        <label class="form-label">Boarding Stop</label>
-        <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
-            <option value="">-- Pehle Trip Select Karein --</option>
-        </select>
-        <span asp-validation-for="BoardingStopId" class="text-danger"></span>
-    </div>
+        <!-- LEFT SIDE: Form Fields -->
+        <div class="col-md-7">
 
-    <div class="mb-3">
-        <label class="form-label">Drop Stop</label>
-        <select asp-for="DropStopId" id="dropSelect" class="form-control">
-            <option value="">-- Pehle Boarding Select Karein --</option>
-        </select>
-        <span asp-validation-for="DropStopId" class="text-danger"></span>
-    </div>
+            <div class="mb-3">
+                <label class="form-label">Select Trip</label>
+                <select asp-for="TripId" id="tripSelect" class="form-control">
+                    <option value="">-- Select Trip --</option>
+                    @foreach (var trip in Model.TripList!)
+                    {
+                        <option value="@trip.TripId">
+                            @trip.Bus?.BusNumber | @trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName
+                            | @trip.DepartureDate.ToString("dd-MMM-yyyy") @trip.DepartureTime
+                            | Seats Left: @trip.AvailableSeats
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="TripId" class="text-danger"></span>
+            </div>
 
-    <div class="mb-3">
-        <label asp-for="PassengerName" class="form-label"></label>
-        <input asp-for="PassengerName" class="form-control" />
-        <span asp-validation-for="PassengerName" class="text-danger"></span>
-    </div>
+            <div class="mb-3">
+                <label class="form-label">Boarding Stop</label>
+                <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
+                    <option value="">-- Pehle Trip Select Karein --</option>
+                </select>
+                <span asp-validation-for="BoardingStopId" class="text-danger"></span>
+            </div>
 
-    <div class="mb-3">
-        <label asp-for="PassengerPhone" class="form-label"></label>
-        <input asp-for="PassengerPhone" class="form-control" />
-        <span asp-validation-for="PassengerPhone" class="text-danger"></span>
-    </div>
+            <div class="mb-3">
+                <label class="form-label">Drop Stop</label>
+                <select asp-for="DropStopId" id="dropSelect" class="form-control">
+                    <option value="">-- Pehle Boarding Select Karein --</option>
+                </select>
+                <span asp-validation-for="DropStopId" class="text-danger"></span>
+            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Seat Number</label>
-        <select asp-for="SeatNumber" id="seatSelect" class="form-control">
-            <option value="">-- Pehle Trip Select Karein --</option>
-        </select>
-        <span asp-validation-for="SeatNumber" class="text-danger"></span>
-    </div>
+            <div class="mb-3">
+                <label asp-for="PassengerName" class="form-label"></label>
+                <input asp-for="PassengerName" class="form-control" placeholder="e.g. Ahmed Khan + Family" />
+                <span asp-validation-for="PassengerName" class="text-danger"></span>
+            </div>
 
-    <button type="submit" class="btn btn-success">Save Booking</button>
-    <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Cancel</a>
+            <div class="mb-3">
+                <label asp-for="PassengerPhone" class="form-label"></label>
+                <input asp-for="PassengerPhone" class="form-control" />
+                <span asp-validation-for="PassengerPhone" class="text-danger"></span>
+            </div>
+
+            <!-- Selected seats yahan hidden inputs ke tor pe add/remove honge JavaScript se -->
+            <div id="hiddenSeatInputs"></div>
+
+            <div id="selectedSeatsSummary">Koi seat select nahi ki abhi tak.</div>
+            <span asp-validation-for="SelectedSeats" class="text-danger"></span>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Save Booking</button>
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE: Seat Map -->
+        <div class="col-md-5">
+
+            <label class="form-label">Select Seat(s)</label>
+            <p class="text-muted" style="font-size: 13px;">Ek se zyada seats select ki ja sakti hain (family/group booking ke liye).</p>
+
+            <div class="seat-legend">
+                <div class="legend-item"><div class="legend-box legend-available"></div> Available</div>
+                <div class="legend-item"><div class="legend-box legend-booked"></div> Booked</div>
+                <div class="legend-item"><div class="legend-box legend-selected"></div> Selected</div>
+            </div>
+
+            <div class="seat-map-card">
+                <div class="driver-box">🚌 Driver</div>
+                <div class="seat-map-scroll-area">
+                    <div id="seatMapContainer">
+                        <p class="text-muted">Pehle Trip select karein.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 </form>
 
@@ -72,57 +176,48 @@
         const tripSelect = document.getElementById("tripSelect");
         const boardingSelect = document.getElementById("boardingSelect");
         const dropSelect = document.getElementById("dropSelect");
-        const seatSelect = document.getElementById("seatSelect");
+        const seatMapContainer = document.getElementById("seatMapContainer");
+        const hiddenSeatInputs = document.getElementById("hiddenSeatInputs");
+        const selectedSeatsSummary = document.getElementById("selectedSeatsSummary");
+
+        // Ye Set (unique list) selected seats ko track karega
+        let selectedSeats = new Set();
 
         tripSelect.addEventListener("change", function() {
             const tripId = tripSelect.value;
 
             boardingSelect.innerHTML = '<option value="">-- Loading... --</option>';
             dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
-            seatSelect.innerHTML = '<option value="">-- Loading... --</option>';
+            seatMapContainer.innerHTML = '<p class="text-muted">Loading seats...</p>';
+
+            selectedSeats.clear();
+            updateHiddenInputs();
+            updateSummary();
 
             if (!tripId) {
                 boardingSelect.innerHTML = '<option value="">-- Pehle Trip Select Karein --</option>';
-                seatSelect.innerHTML = '<option value="">-- Pehle Trip Select Karein --</option>';
+                seatMapContainer.innerHTML = '<p class="text-muted">Pehle Trip select karein.</p>';
                 return;
             }
 
-            // Stops load karo
             fetch(`/Booking/GetStopsForTrip?tripId=${tripId}`)
                 .then(response => response.json())
                 .then(stops => {
                     let optionsHtml = '<option value="">-- Select Stop --</option>';
-
                     stops.forEach(stop => {
-                        // data-order attribute mein StopOrder save kar rahe hain, baad mein filter ke liye
                         optionsHtml += `<option value="${stop.routeStopId}" data-order="${stop.stopOrder}">${stop.stopName}</option>`;
                     });
-
                     boardingSelect.innerHTML = optionsHtml;
                     dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
-                })
-                .catch(() => {
-                    boardingSelect.innerHTML = '<option value="">-- Error Loading Stops --</option>';
                 });
 
-            // Available seats load karo
-            fetch(`/Booking/GetAvailableSeats?tripId=${tripId}`)
+            fetch(`/Booking/GetSeatMapForTrip?tripId=${tripId}`)
                 .then(response => response.json())
-                .then(seats => {
-                    let seatOptionsHtml = '<option value="">-- Select Seat --</option>';
-
-                    seats.forEach(seatNumber => {
-                        seatOptionsHtml += `<option value="${seatNumber}">Seat ${seatNumber}</option>`;
-                    });
-
-                    seatSelect.innerHTML = seatOptionsHtml;
-                })
-                .catch(() => {
-                    seatSelect.innerHTML = '<option value="">-- Error Loading Seats --</option>';
+                .then(data => {
+                    renderSeatMap(data.totalSeats, data.bookedSeats);
                 });
         });
 
-        // Boarding select hone pe, Drop dropdown ko filter karo (sirf aage wale stops dikhao)
         boardingSelect.addEventListener("change", function() {
             const selectedOption = boardingSelect.options[boardingSelect.selectedIndex];
             const boardingOrder = parseInt(selectedOption.getAttribute("data-order"));
@@ -133,18 +228,95 @@
             }
 
             let dropOptionsHtml = '<option value="">-- Select Drop Stop --</option>';
-
-            // Boarding dropdown ke saare options le kar, sirf unko dikhao jinka order boarding se bada hai
             for (let option of boardingSelect.options) {
                 if (option.value === "") continue;
-
                 const optOrder = parseInt(option.getAttribute("data-order"));
                 if (optOrder > boardingOrder) {
                     dropOptionsHtml += `<option value="${option.value}">${option.text}</option>`;
                 }
             }
-
             dropSelect.innerHTML = dropOptionsHtml;
         });
+
+        function renderSeatMap(totalSeats, bookedSeats) {
+            if (totalSeats === 0) {
+                seatMapContainer.innerHTML = '<p class="text-danger">Seat info nahi mili.</p>';
+                return;
+            }
+
+            let html = "";
+            let seatNum = 1;
+
+            while (seatNum <= totalSeats) {
+                html += '<div class="seat-row">';
+
+                for (let col = 0; col < 4; col++) {
+                    if (col === 2) {
+                        html += '<div></div>';
+                    }
+
+                    if (seatNum <= totalSeats) {
+                        const isBooked = bookedSeats.includes(seatNum);
+                        const seatClass = isBooked ? "seat-booked" : "seat-available";
+                        const disabledAttr = isBooked ? "disabled" : "";
+
+                        html += `<button type="button" class="seat-btn ${seatClass}" data-seat="${seatNum}" ${disabledAttr}>${seatNum}</button>`;
+                        seatNum++;
+                    } else {
+                        html += '<div></div>';
+                    }
+                }
+
+                html += '</div>';
+            }
+
+            seatMapContainer.innerHTML = html;
+
+            // Click event: toggle select/deselect
+            document.querySelectorAll('.seat-btn:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const seatNumber = parseInt(this.getAttribute('data-seat'));
+
+                    if (selectedSeats.has(seatNumber)) {
+                        // Already selected — deselect karo
+                        selectedSeats.delete(seatNumber);
+                        this.classList.remove('seat-selected');
+                        this.classList.add('seat-available');
+                    } else {
+                        // Naya select karo
+                        selectedSeats.add(seatNumber);
+                        this.classList.remove('seat-available');
+                        this.classList.add('seat-selected');
+                    }
+
+                    updateHiddenInputs();
+                    updateSummary();
+                });
+            });
+        }
+
+        function updateHiddenInputs() {
+            // Purane hidden inputs saaf karo, naye banao
+            hiddenSeatInputs.innerHTML = "";
+
+            selectedSeats.forEach(seatNum => {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "SelectedSeats";
+                input.value = seatNum;
+                hiddenSeatInputs.appendChild(input);
+            });
+        }
+
+        function updateSummary() {
+            if (selectedSeats.size === 0) {
+                selectedSeatsSummary.textContent = "Koi seat select nahi ki abhi tak.";
+                return;
+            }
+
+            const sortedSeats = Array.from(selectedSeats).sort((a, b) => a - b);
+            selectedSeatsSummary.textContent =
+                `Selected Seats: ${sortedSeats.join(", ")} (${sortedSeats.length} seat${sortedSeats.length > 1 ? 's' : ''})`;
+        }
     </script>
 }

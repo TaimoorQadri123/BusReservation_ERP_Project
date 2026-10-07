@@ -25,9 +25,27 @@ namespace BusReservationERP.Controllers
                     .ThenInclude(t => t!.Bus)
                 .Include(b => b.BoardingStop)
                 .Include(b => b.DropStop)
+                .OrderByDescending(b => b.CreatedAt)
                 .ToListAsync();
 
-            return View(bookings);
+            // BookingGroupId ke hisaab se group karo
+            var groupedBookings = bookings
+                .GroupBy(b => b.BookingGroupId)
+                .Select(g => new BookingGroupViewModel
+                {
+                    BookingGroupId = g.Key,
+                    PassengerName = g.First().PassengerName,
+                    PassengerPhone = g.First().PassengerPhone,
+                    SeatNumbers = g.Select(b => b.SeatNumber).OrderBy(s => s).ToList(),
+                    Trip = g.First().Trip,
+                    BoardingStop = g.First().BoardingStop,
+                    DropStop = g.First().DropStop,
+                    BookingStatus = g.First().BookingStatus,
+                    SampleBookingId = g.First().BookingId
+                })
+                .ToList();
+
+            return View(groupedBookings);
         }
 
         // GET: /Booking/Create
@@ -80,9 +98,10 @@ namespace BusReservationERP.Controllers
                 return View(vm);
             }
 
-            if (trip.AvailableSeats <= 0)
+            // Check karo itni seats available hain ya nahi (jitni admin ne select ki hain)
+            if (vm.SelectedSeats.Count > trip.AvailableSeats)
             {
-                ModelState.AddModelError("", "The Seats are full.");
+                ModelState.AddModelError("", $"Sirf {trip.AvailableSeats} seats available hain, aapne {vm.SelectedSeats.Count} select ki hain.");
                 vm.TripList = await _context.Trips
                     .Include(t => t.Bus)
                     .Include(t => t.Route)
@@ -114,7 +133,7 @@ namespace BusReservationERP.Controllers
 
             if (boardingStop.StopOrder >= dropStop.StopOrder)
             {
-                ModelState.AddModelError("", "Drop stop,SHould be Ahead From Boarding stop .");
+                ModelState.AddModelError("", "Drop stop, Boarding stop se aage hona chahiye.");
                 vm.TripList = await _context.Trips
                     .Include(t => t.Bus)
                     .Include(t => t.Route)
@@ -126,15 +145,17 @@ namespace BusReservationERP.Controllers
                 return View(vm);
             }
 
-            // Seat already li hui to nahi, isi Trip mein
-            bool seatTaken = await _context.Bookings.AnyAsync(b =>
-                b.TripId == vm.TripId &&
-                b.SeatNumber == vm.SeatNumber &&
-                b.BookingStatus != "Cancelled");
+            // Check karo koi selected seat pehle se book to nahi
+            var alreadyBookedSeats = await _context.Bookings
+                .Where(b => b.TripId == vm.TripId &&
+                            b.BookingStatus != "Cancelled" &&
+                            vm.SelectedSeats.Contains(b.SeatNumber))
+                .Select(b => b.SeatNumber)
+                .ToListAsync();
 
-            if (seatTaken)
+            if (alreadyBookedSeats.Any())
             {
-                ModelState.AddModelError("", "This seat Number is already booked.");
+                ModelState.AddModelError("", $"Ye seats pehle se book hain: {string.Join(", ", alreadyBookedSeats)}");
                 vm.TripList = await _context.Trips
                     .Include(t => t.Bus)
                     .Include(t => t.Route)
@@ -146,23 +167,31 @@ namespace BusReservationERP.Controllers
                 return View(vm);
             }
 
-            var booking = new Booking
-            {
-                TripId = vm.TripId,
-                BoardingStopId = vm.BoardingStopId,
-                DropStopId = vm.DropStopId,
-                PassengerName = vm.PassengerName,
-                PassengerPhone = vm.PassengerPhone,
-                SeatNumber = vm.SeatNumber,
-                BookingStatus = "Booked"
-            };
+            // Sab sahi hai — ek Group ID banao aur har seat ke liye alag Booking record banao
+            Guid groupId = Guid.NewGuid();
 
-            _context.Bookings.Add(booking);
-
-            // Seat kam karo aur Full check karo
-            trip.AvailableSeats -= 1;
-            if (trip.AvailableSeats == 0)
+            foreach (var seatNum in vm.SelectedSeats)
             {
+                var booking = new Booking
+                {
+                    BookingGroupId = groupId,
+                    TripId = vm.TripId,
+                    BoardingStopId = vm.BoardingStopId,
+                    DropStopId = vm.DropStopId,
+                    PassengerName = vm.PassengerName,
+                    PassengerPhone = vm.PassengerPhone,
+                    SeatNumber = seatNum,
+                    BookingStatus = "Booked"
+                };
+
+                _context.Bookings.Add(booking);
+            }
+
+            // Seats kam karo (jitni seats select hui, utni kam karo)
+            trip.AvailableSeats -= vm.SelectedSeats.Count;
+            if (trip.AvailableSeats <= 0)
+            {
+                trip.AvailableSeats = 0;
                 trip.Status = "Full";
             }
 
@@ -216,39 +245,87 @@ namespace BusReservationERP.Controllers
 
             return Json(availableSeats);
         }
+        // AJAX endpoint: Trip ki seat map (total seats + booked seats) laana
+        [HttpGet]
+        public async Task<IActionResult> GetSeatMapForTrip(int tripId)
+        {
+            var trip = await _context.Trips
+                .Include(t => t.Bus)
+                .FirstOrDefaultAsync(t => t.TripId == tripId);
+
+            if (trip == null || trip.Bus == null)
+            {
+                return Json(new { totalSeats = 0, bookedSeats = new List<int>() });
+            }
+
+            var bookedSeats = await _context.Bookings
+                .Where(b => b.TripId == tripId && b.BookingStatus != "Cancelled")
+                .Select(b => b.SeatNumber)
+                .ToListAsync();
+
+            return Json(new { totalSeats = trip.Bus.TotalSeats, bookedSeats = bookedSeats });
+        }
         // POST: /Booking/Cancel/5
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {
-            var booking = await _context.Bookings
-                .Include(b => b.Trip)
-                .FirstOrDefaultAsync(b => b.BookingId == id);
-
-            if (booking == null)
+            var referenceBooking = await _context.Bookings.FindAsync(id);
+            if (referenceBooking == null)
             {
                 return NotFound();
             }
 
-            if (booking.BookingStatus == "Cancelled")
+            // Isi Group ke saare bookings nikalo (poori family/group)
+            var groupBookings = await _context.Bookings
+                .Include(b => b.Trip)
+                .Where(b => b.BookingGroupId == referenceBooking.BookingGroupId && b.BookingStatus != "Cancelled")
+                .ToListAsync();
+
+            if (!groupBookings.Any())
             {
                 TempData["Error"] = "Ye booking pehle se cancelled hai.";
                 return RedirectToAction(nameof(Index));
             }
 
-            booking.BookingStatus = "Cancelled";
+            Trip? trip = null;
 
-            // Trip ki seat wapas badhao
-            if (booking.Trip != null)
+            foreach (var booking in groupBookings)
             {
-                booking.Trip.AvailableSeats += 1;
+                booking.BookingStatus = "Cancelled";
+                trip = booking.Trip;
+            }
 
-                // Agar Trip Full thi, ab wapas Scheduled kar do (kyunki seat khali hui)
-                if (booking.Trip.Status == "Full")
+            // Trip ki seats wapas badhao (jitni seats is group mein thin, utni)
+            if (trip != null)
+            {
+                trip.AvailableSeats += groupBookings.Count;
+
+                if (trip.Status == "Full")
                 {
-                    booking.Trip.Status = "Scheduled";
+                    trip.Status = "Scheduled";
                 }
             }
 
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        // POST: /Booking/Delete/5
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var referenceBooking = await _context.Bookings.FindAsync(id);
+            if (referenceBooking == null)
+            {
+                return NotFound();
+            }
+
+            // Isi Group ke saare bookings nikalo (poori family/group)
+            var groupBookings = await _context.Bookings
+                .Where(b => b.BookingGroupId == referenceBooking.BookingGroupId)
+                .ToListAsync();
+
+            _context.Bookings.RemoveRange(groupBookings);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

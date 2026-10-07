@@ -131,6 +131,7 @@ E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.cspro
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.MvcApplicationPartsAssemblyInfo.cache
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.RazorAssemblyInfo.cache
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.RazorAssemblyInfo.cs
+E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.sourcelink.json
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\rjimswa.dswa.cache.json
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

@@ -4,6 +4,9 @@
     {
         public int BookingId { get; set; }
 
+        // Multiple seats ko ek sath group karne ke liye (jaise family booking)
+        public Guid BookingGroupId { get; set; }
+
         public int TripId { get; set; }
         public Trip? Trip { get; set; }
 
@@ -21,7 +24,6 @@
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        // Navigation property — ek Booking ka ek Payment hoga
         public Payment? Payment { get; set; }
     }
 }

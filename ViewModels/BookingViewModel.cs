@@ -21,9 +21,10 @@ namespace BusReservationERP.ViewModels
         [Required(ErrorMessage = "The Phone Number Is Required")]
         public string PassengerPhone { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "The Seat Number Is Required")]
-        [Range(1, 100, ErrorMessage = "Please enter a valid seat number ")]
-        public int SeatNumber { get; set; }
+        // Ab ek se zyada seats select ho sakti hain (family booking ke liye)
+        [Required(ErrorMessage = "Kam az kam ek seat select karna zaroori hai")]
+        [MinLength(1, ErrorMessage = "Kam az kam ek seat select karna zaroori hai")]
+        public List<int> SelectedSeats { get; set; } = new List<int>();
 
         // Dropdown ke liye
         public List<BusReservationERP.Models.Trip>? TripList { get; set; }

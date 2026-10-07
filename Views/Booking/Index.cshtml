@@ -1,4 +1,4 @@
-﻿@model List<BusReservationERP.Models.Booking>
+﻿@model List<BusReservationERP.ViewModels.BookingGroupViewModel>
 
 @{
     ViewData["Title"] = "Booking List";
@@ -18,7 +18,7 @@
         <tr>
             <th>Passenger</th>
             <th>Phone</th>
-            <th>Seat</th>
+            <th>Seats</th>
             <th>Trip</th>
             <th>Boarding</th>
             <th>Drop</th>
@@ -27,30 +27,53 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var booking in Model)
+        @foreach (var group in Model)
         {
             <tr>
-                <td>@booking.PassengerName</td>
-                <td>@booking.PassengerPhone</td>
-                <td>@booking.SeatNumber</td>
+                <td>@group.PassengerName</td>
+                <td>@group.PassengerPhone</td>
                 <td>
-                    @booking.Trip?.Bus?.BusNumber
-                    (@booking.Trip?.DepartureDate.ToString("dd-MMM-yyyy") @booking.Trip?.DepartureTime)
+                    @string.Join(", ", group.SeatNumbers)
+                    <span class="badge bg-secondary">@group.SeatNumbers.Count seat@(group.SeatNumbers.Count > 1 ? "s" : "")</span>
                 </td>
-                <td>@booking.BoardingStop?.StopName</td>
-                <td>@booking.DropStop?.StopName</td>
-                <td>@booking.BookingStatus</td>
                 <td>
-                    @if (booking.BookingStatus != "Cancelled")
+                    @group.Trip?.Bus?.BusNumber
+                    (@group.Trip?.DepartureDate.ToString("dd-MMM-yyyy") @group.Trip?.DepartureTime)
+                </td>
+                <td>@group.BoardingStop?.StopName</td>
+                <td>@group.DropStop?.StopName</td>
+                <td>@group.BookingStatus</td>
+                <td>
+                    @if (group.BookingStatus != "Cancelled")
                     {
                         <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
-                            <input type="hidden" name="id" value="@booking.BookingId" />
+                            <input type="hidden" name="id" value="@group.SampleBookingId" />
                             <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Do you want to cancel this booking?');">
-                                Cancel
+                                    onclick="return confirm('Kya aap ye poori booking (saari seats) cancel karna chahte hain?');">
+                                Cancel All
                             </button>
                         </form>
                     }
+                </td>
+                <td>
+                    @if (group.BookingStatus != "Cancelled")
+                    {
+                        <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@group.SampleBookingId" />
+                            @* <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Kya aap ye poori booking (saari seats) cancel karna chahte hain?');">
+                                Cancel All
+                            </button> *@
+                        </form>
+                    }
+
+                    <form asp-controller="Booking" asp-action="Delete" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@group.SampleBookingId" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Kya aap ye booking record poori tarah delete karna chahte hain? Ye wapas nahi ho sakta.');">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
