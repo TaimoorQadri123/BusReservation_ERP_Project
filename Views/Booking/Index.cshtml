@@ -23,6 +23,7 @@
             <th>Boarding</th>
             <th>Drop</th>
             <th>Status</th>
+            <th>Payment</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -49,31 +50,42 @@
                         <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
                             <input type="hidden" name="id" value="@group.SampleBookingId" />
                             <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Kya aap ye poori booking (saari seats) cancel karna chahte hain?');">
+                                    onclick="return confirm('Do you want to cancel this entire booking (all seats)?');">
                                 Cancel All
                             </button>
                         </form>
-                    }
-                </td>
-                <td>
-                    @if (group.BookingStatus != "Cancelled")
-                    {
-                        <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
-                            <input type="hidden" name="id" value="@group.SampleBookingId" />
-                            @* <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Kya aap ye poori booking (saari seats) cancel karna chahte hain?');">
-                                Cancel All
-                            </button> *@
-                        </form>
+
+                        <a asp-controller="Payment" asp-action="Create" asp-route-groupId="@group.BookingGroupId" class="btn btn-sm btn-primary">
+                            Add Payment
+                        </a>
                     }
 
                     <form asp-controller="Booking" asp-action="Delete" method="post" style="display:inline">
                         <input type="hidden" name="id" value="@group.SampleBookingId" />
-                        <button type="submit" class="btn btn-sm btn-outline-danger"
-                                onclick="return confirm('Kya aap ye booking record poori tarah delete karna chahte hain? Ye wapas nahi ho sakta.');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger mt-1"
+                                onclick="return confirm('Do you want to permanently delete this booking record? This action cannot be undone.');">
                             Delete
                         </button>
                     </form>
+                </td>
+                <td>@group.BookingStatus</td>
+                <td>
+                    @if (group.PaymentStatus == "Not Recorded")
+                    {
+                        <span class="badge bg-secondary">Not Recorded</span>
+                    }
+                    else if (group.PaymentStatus == "Paid")
+                    {
+                        <span class="badge bg-success">Paid (@group.PaymentAmount)</span>
+                    }
+                    else if (group.PaymentStatus == "Partial")
+                    {
+                        <span class="badge bg-warning text-dark">Partial (@group.PaymentAmount)</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Pending</span>
+                    }
                 </td>
             </tr>
         }

@@ -11,5 +11,9 @@
         public BusReservationERP.Models.RouteStop? DropStop { get; set; }
         public string BookingStatus { get; set; } = string.Empty;
         public int SampleBookingId { get; set; }
+
+        // Naya: Payment ki info
+        public string PaymentStatus { get; set; } = "Not Recorded";
+        public decimal? PaymentAmount { get; set; }
     }
 }

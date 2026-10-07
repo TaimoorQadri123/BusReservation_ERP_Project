@@ -24,6 +24,6 @@
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public Payment? Payment { get; set; }
+        //public Payment? Payment { get; set; }
     }
 }

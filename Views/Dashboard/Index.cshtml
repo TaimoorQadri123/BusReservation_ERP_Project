@@ -1,0 +1,269 @@
+﻿@model BusReservationERP.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        border-left: 4px solid #0037b0;
+        height: 100%;
+    }
+    .stat-card .stat-icon {
+        width: 48px; height: 48px;
+        border-radius: 10px;
+        background: #e5eeff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 22px;
+    }
+    .stat-number { font-size: 28px; font-weight: 700; color: #0b1c30; }
+    .stat-label { font-size: 12px; text-transform: uppercase; color: #747685; letter-spacing: 0.03em; }
+
+    .dash-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        padding: 20px;
+        height: 100%;
+    }
+
+    .seat-progress {
+        height: 6px;
+        border-radius: 4px;
+        background: #e5eeff;
+        overflow: hidden;
+        width: 100px;
+    }
+    .seat-progress-bar { height: 100%; }
+
+    .status-badge { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+    .status-scheduled { background: #dce1ff; color: #0037b0; }
+    .status-full { background: #ffdad6; color: #ba1a1a; }
+    .status-cancelled { background: #e5e5e5; color: #555; }
+
+    .avatar-circle {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: #dce1ff; color: #0037b0;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 12px; flex-shrink: 0;
+    }
+
+    .payment-bar-segment { height: 100%; }
+</style>
+
+<h2 class="mb-1">Operations Overview</h2>
+<p class="text-muted mb-4">Live dispatch, seat occupancy, and ticketing metrics for today — @DateTime.Today.ToString("dd MMM yyyy")</p>
+
+<!-- Stat Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="stat-label">Today's Trips</div>
+                    <div class="stat-number">@Model.TodayTripsCount</div>
+                </div>
+                <div class="stat-icon">🚌</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card" style="border-left-color:#006a63;">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="stat-label">Today's Bookings</div>
+                    <div class="stat-number">@Model.TodayBookingsCount</div>
+                </div>
+                <div class="stat-icon" style="background:#d6f5ef;">🎟️</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card" style="border-left-color:#b7791f;">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="stat-label">Today's Revenue</div>
+                    <div class="stat-number">Rs. @Model.TodayRevenue.ToString("N0")</div>
+                </div>
+                <div class="stat-icon" style="background:#fff3cd;">💰</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card" style="border-left-color:#747685;">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="stat-label">Available Seats Today</div>
+                    <div class="stat-number">@Model.AvailableSeatsToday</div>
+                </div>
+                <div class="stat-icon" style="background:#eceff3;">💺</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Today's Trips + Recent Bookings -->
+<div class="row g-3 mb-4">
+    <div class="col-lg-8">
+        <div class="dash-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Today's Trips <span class="badge bg-light text-dark border">@Model.TodayTripsCount</span></h5>
+                <a asp-controller="Trip" asp-action="Index" class="small btn btn-primary">View All →</a>
+            </div>
+
+            @if (!Model.TodayTrips.Any())
+            {
+                <p class="text-muted">today no trip was schedule.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr class="text-muted small text-uppercase">
+                                <th>Bus</th>
+                                <th>Route</th>
+                                <th>Departure</th>
+                                <th>Occupancy</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trip in Model.TodayTrips)
+                            {
+                                double pct = trip.TotalSeats > 0 ? (double)trip.BookedSeats / trip.TotalSeats * 100 : 0;
+                                string barColor = pct >= 100 ? "#ba1a1a" : pct >= 70 ? "#b7791f" : "#0037b0";
+                                string badgeClass = trip.Status == "Full" ? "status-full" : trip.Status == "Cancelled" ? "status-cancelled" : "status-scheduled";
+
+                                <tr>
+                                    <td><strong>@trip.BusNumber</strong></td>
+                                    <td>@trip.Route</td>
+                                    <td>@trip.DepartureTime</td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span class="small">@trip.BookedSeats / @trip.TotalSeats</span>
+                                            <div class="seat-progress">
+                                                <div class="seat-progress-bar" style="width:@pct%; background-color:@barColor;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge @badgeClass">@trip.Status</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="dash-card">
+            <h5 class="mb-3">Recent Bookings</h5>
+
+            @if (!Model.RecentBookings.Any())
+            {
+                <p class="text-muted">Not Booking Still yet..</p>
+            }
+            else
+            {
+                @foreach (var b in Model.RecentBookings)
+                {
+                    <div class="d-flex align-items-start gap-2 mb-3 pb-3 border-bottom">
+                        <div class="avatar-circle">@(b.PassengerName.Length >= 2 ? b.PassengerName.Substring(0, 2).ToUpper() : b.PassengerName.ToUpper())</div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <strong class="small">@b.PassengerName</strong>
+                                <span class="small text-muted">@b.CreatedAt.ToString("hh:mm tt")</span>
+                            </div>
+                            <div class="small text-muted">@b.SeatCount seat@(b.SeatCount > 1 ? "s" : "") • @b.BusNumber</div>
+                            <div class="small text-muted">@b.Route</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Payment Breakdown + Fleet Status -->
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="dash-card">
+            <h5 class="mb-3">Payment Status Breakdown</h5>
+
+            @{
+                int totalPayments = Model.PaidCount + Model.PendingCount + Model.PartialCount;
+                double paidPct = totalPayments > 0 ? (double)Model.PaidCount / totalPayments * 100 : 0;
+                double pendingPct = totalPayments > 0 ? (double)Model.PendingCount / totalPayments * 100 : 0;
+                double partialPct = totalPayments > 0 ? (double)Model.PartialCount / totalPayments * 100 : 0;
+            }
+
+            <div class="d-flex" style="height:10px; border-radius:6px; overflow:hidden; background:#eee;">
+                <div class="payment-bar-segment" style="width:@paidPct%; background:#198754;"></div>
+                <div class="payment-bar-segment" style="width:@pendingPct%; background:#dc3545;"></div>
+                <div class="payment-bar-segment" style="width:@partialPct%; background:#ffc107;"></div>
+            </div>
+
+            <div class="mt-3">
+                <div class="d-flex justify-content-between align-items-center p-2 rounded mb-2" style="background:#f8f9fa;">
+                    <div><span class="badge" style="background:#198754;">&nbsp;</span> Paid <span class="text-muted small">(@Model.PaidCount bookings)</span></div>
+                    <strong>Rs. @Model.PaidAmount.ToString("N0")</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center p-2 rounded mb-2" style="background:#f8f9fa;">
+                    <div><span class="badge" style="background:#dc3545;">&nbsp;</span> Pending <span class="text-muted small">(@Model.PendingCount bookings)</span></div>
+                    <strong>Rs. @Model.PendingAmount.ToString("N0")</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center p-2 rounded" style="background:#f8f9fa;">
+                    <div><span class="badge" style="background:#ffc107;">&nbsp;</span> Partial <span class="text-muted small">(@Model.PartialCount bookings)</span></div>
+                    <strong>Rs. @Model.PartialAmount.ToString("N0")</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dash-card">
+            <h5 class="mb-3">Fleet Status <span class="badge bg-light text-dark border">@Model.TotalBuses buses total</span></h5>
+
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class="p-3 rounded" style="background:#f8f9fa;">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span><span class="badge" style="background:#198754;">&nbsp;</span> Active</span>
+                        </div>
+                        <div class="fs-4 fw-bold">@Model.ActiveBuses</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded" style="background:#f8f9fa;">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span><span class="badge" style="background:#ffc107;">&nbsp;</span> Maintenance</span>
+                        </div>
+                        <div class="fs-4 fw-bold">@Model.MaintenanceBuses</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded" style="background:#f8f9fa;">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span><span class="badge" style="background:#6c757d;">&nbsp;</span> Inactive</span>
+                        </div>
+                        <div class="fs-4 fw-bold">@Model.InactiveBuses</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded" style="background:#f8f9fa;">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Total</span>
+                        </div>
+                        <div class="fs-4 fw-bold">@Model.TotalBuses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

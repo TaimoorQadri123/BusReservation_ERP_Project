@@ -18,6 +18,7 @@ namespace BusReservationERP.Controllers
         }
 
         // GET: /Booking
+        // GET: /Booking
         public async Task<IActionResult> Index()
         {
             var bookings = await _context.Bookings
@@ -28,20 +29,29 @@ namespace BusReservationERP.Controllers
                 .OrderByDescending(b => b.CreatedAt)
                 .ToListAsync();
 
+            var allPayments = await _context.Payments.ToListAsync();
+
             // BookingGroupId ke hisaab se group karo
             var groupedBookings = bookings
                 .GroupBy(b => b.BookingGroupId)
-                .Select(g => new BookingGroupViewModel
+                .Select(g =>
                 {
-                    BookingGroupId = g.Key,
-                    PassengerName = g.First().PassengerName,
-                    PassengerPhone = g.First().PassengerPhone,
-                    SeatNumbers = g.Select(b => b.SeatNumber).OrderBy(s => s).ToList(),
-                    Trip = g.First().Trip,
-                    BoardingStop = g.First().BoardingStop,
-                    DropStop = g.First().DropStop,
-                    BookingStatus = g.First().BookingStatus,
-                    SampleBookingId = g.First().BookingId
+                    var payment = allPayments.FirstOrDefault(p => p.BookingGroupId == g.Key);
+
+                    return new BookingGroupViewModel
+                    {
+                        BookingGroupId = g.Key,
+                        PassengerName = g.First().PassengerName,
+                        PassengerPhone = g.First().PassengerPhone,
+                        SeatNumbers = g.Select(b => b.SeatNumber).OrderBy(s => s).ToList(),
+                        Trip = g.First().Trip,
+                        BoardingStop = g.First().BoardingStop,
+                        DropStop = g.First().DropStop,
+                        BookingStatus = g.First().BookingStatus,
+                        SampleBookingId = g.First().BookingId,
+                        PaymentStatus = payment != null ? payment.Status : "Not Recorded",
+                        PaymentAmount = payment?.Amount
+                    };
                 })
                 .ToList();
 

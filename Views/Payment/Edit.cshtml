@@ -1,0 +1,50 @@
+﻿@model BusReservationERP.Models.Payment
+
+@{
+    ViewData["Title"] = "Edit Payment";
+}
+
+<h2>Edit Payment</h2>
+
+<div class="card mb-3" style="max-width: 500px;">
+    <div class="card-body">
+        <p class="mb-1"><strong>Passenger:</strong> @ViewBag.PassengerName</p>
+        <p class="mb-1"><strong>Seats:</strong> @ViewBag.SeatNumbers (@ViewBag.SeatCount seats)</p>
+    </div>
+</div>
+
+<form asp-controller="Payment" asp-action="Edit" method="post" style="max-width: 500px;">
+
+    <input type="hidden" asp-for="PaymentId" />
+    <input type="hidden" asp-for="BookingGroupId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Amount" class="form-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Payment Method</label>
+        <select asp-for="Method" class="form-control">
+            <option value="Cash">Cash</option>
+            <option value="Card">Card</option>
+            <option value="Online">Online</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Payment Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="Paid">Paid</option>
+            <option value="Partial">Partial</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Payment</button>
+    <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>

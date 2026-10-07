@@ -106,7 +106,7 @@
             <div class="mb-3">
                 <label class="form-label">Boarding Stop</label>
                 <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
-                    <option value="">-- Pehle Trip Select Karein --</option>
+                    <option value="">-- Please select a trip first. --</option>
                 </select>
                 <span asp-validation-for="BoardingStopId" class="text-danger"></span>
             </div>
@@ -114,7 +114,7 @@
             <div class="mb-3">
                 <label class="form-label">Drop Stop</label>
                 <select asp-for="DropStopId" id="dropSelect" class="form-control">
-                    <option value="">-- Pehle Boarding Select Karein --</option>
+                    <option value="">-- Please select a boarding stop first. --</option>
                 </select>
                 <span asp-validation-for="DropStopId" class="text-danger"></span>
             </div>
@@ -134,7 +134,7 @@
             <!-- Selected seats yahan hidden inputs ke tor pe add/remove honge JavaScript se -->
             <div id="hiddenSeatInputs"></div>
 
-            <div id="selectedSeatsSummary">Koi seat select nahi ki abhi tak.</div>
+            <div id="selectedSeatsSummary">No seat has been selected yet..</div>
             <span asp-validation-for="SelectedSeats" class="text-danger"></span>
 
             <div class="mt-4">
@@ -148,7 +148,7 @@
         <div class="col-md-5">
 
             <label class="form-label">Select Seat(s)</label>
-            <p class="text-muted" style="font-size: 13px;">Ek se zyada seats select ki ja sakti hain (family/group booking ke liye).</p>
+            <p class="text-muted" style="font-size: 13px;">Multiple seats can be selected (for family/group bookings)..</p>
 
             <div class="seat-legend">
                 <div class="legend-item"><div class="legend-box legend-available"></div> Available</div>
@@ -160,7 +160,7 @@
                 <div class="driver-box">🚌 Driver</div>
                 <div class="seat-map-scroll-area">
                     <div id="seatMapContainer">
-                        <p class="text-muted">Pehle Trip select karein.</p>
+                        <p class="text-muted">Please select a trip first.</p>
                     </div>
                 </div>
             </div>
@@ -187,7 +187,7 @@
             const tripId = tripSelect.value;
 
             boardingSelect.innerHTML = '<option value="">-- Loading... --</option>';
-            dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+            dropSelect.innerHTML = '<option value="">-- Please select a boarding stop first. --</option>';
             seatMapContainer.innerHTML = '<p class="text-muted">Loading seats...</p>';
 
             selectedSeats.clear();
@@ -195,8 +195,8 @@
             updateSummary();
 
             if (!tripId) {
-                boardingSelect.innerHTML = '<option value="">-- Pehle Trip Select Karein --</option>';
-                seatMapContainer.innerHTML = '<p class="text-muted">Pehle Trip select karein.</p>';
+                boardingSelect.innerHTML = '<option value="">-- Please select a trip first. --</option>';
+                seatMapContainer.innerHTML = '<p class="text-muted">Please select a trip first.</p>';
                 return;
             }
 
@@ -208,7 +208,7 @@
                         optionsHtml += `<option value="${stop.routeStopId}" data-order="${stop.stopOrder}">${stop.stopName}</option>`;
                     });
                     boardingSelect.innerHTML = optionsHtml;
-                    dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+                    dropSelect.innerHTML = '<option value="">-- Please select a boarding stop first. --</option>';
                 });
 
             fetch(`/Booking/GetSeatMapForTrip?tripId=${tripId}`)
@@ -223,7 +223,7 @@
             const boardingOrder = parseInt(selectedOption.getAttribute("data-order"));
 
             if (!boardingSelect.value) {
-                dropSelect.innerHTML = '<option value="">-- Pehle Boarding Select Karein --</option>';
+                dropSelect.innerHTML = '<option value="">-- Please select a boarding stop first. --</option>';
                 return;
             }
 
@@ -240,7 +240,7 @@
 
         function renderSeatMap(totalSeats, bookedSeats) {
             if (totalSeats === 0) {
-                seatMapContainer.innerHTML = '<p class="text-danger">Seat info nahi mili.</p>';
+                seatMapContainer.innerHTML = '<p class="text-danger">Seat info not available.</p>';
                 return;
             }
 
@@ -310,7 +310,7 @@
 
         function updateSummary() {
             if (selectedSeats.size === 0) {
-                selectedSeatsSummary.textContent = "Koi seat select nahi ki abhi tak.";
+                selectedSeatsSummary.textContent = "No seat has been selected yet.";
                 return;
             }
 

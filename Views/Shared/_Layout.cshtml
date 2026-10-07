@@ -5,62 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BusReservationERP</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BusReservationERP.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+            body {
+                background-color: #f8f9ff;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 240px;
+                background-color: #eff4ff;
+                box-shadow: 1px 0 6px rgba(0,0,0,0.05);
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .sidebar-brand {
+                padding: 20px 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+                .sidebar-brand .icon {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 8px;
+                    background: #0037b0;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                }
+
+                .sidebar-brand .title {
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: #0b1c30;
+                    line-height: 1;
+                }
+
+                .sidebar-brand .subtitle {
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    color: #747685;
+                    letter-spacing: 0.05em;
+                }
+
+            .sidebar-nav {
+                padding: 0 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+                .sidebar-nav a {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 10px 14px;
+                    border-radius: 8px;
+                    color: #434655;
+                    text-decoration: none;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all 0.15s;
+                }
+
+                    .sidebar-nav a:hover {
+                        background-color: #dce9ff;
+                        color: #0b1c30;
+                    }
+
+                    .sidebar-nav a.active {
+                        background-color: #0037b0;
+                        color: #fff;
+                        font-weight: 600;
+                    }
+
+            .sidebar-footer {
+                padding: 16px;
+            }
+
+            .main-wrapper {
+                margin-left: 240px;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .top-header {
+                background: #fff;
+                box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+                padding: 12px 24px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .page-content {
+                padding: 24px;
+                flex: 1;
+            }
+
+            @@media (max-width: 767px) {
+                .sidebar {
+                    display: none;
+                }
+
+                .main-wrapper {
+                    margin-left: 0;
+                }
+            }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BusReservationERP</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Bus" asp-action="Index">Buses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Route" asp-action="Index">Routes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Trip" asp-action="Index">Trips </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">City </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Booking </a>
-                        </li>
-                        <li>
-                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-flex">
-                            <button type="submit" class="btn btn-outline-danger">Logout</button>
-                        </form>
-                        </li>
-                    </ul>
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <div class="icon">🚌</div>
+                    <div>
+                        <div class="title">BusReservationERP</div>
+                        <div class="subtitle">Admin Panel</div>
+                    </div>
                 </div>
+
+                <nav class="sidebar-nav">
+                    <a asp-controller="Dashboard" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
+                        Dashboard
+                    </a>
+                    <a asp-controller="Bus" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Bus" ? "active" : "")">
+                         Buses
+                    </a>
+                    <a asp-controller="City" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "City" ? "active" : "")">
+                         Cities
+                    </a>
+                    <a asp-controller="Route" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Route" ? "active" : "")">
+                         Routes
+                    </a>
+                    <a asp-controller="Trip" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Trip" ? "active" : "")">
+                         Trips
+                    </a>
+                    <a asp-controller="Booking" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")">
+                         Bookings
+                    </a>
+                </nav>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <div class="sidebar-footer">
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">Logout</button>
+                </form>
+            </div>
+        </aside>
+    }
+
+    <div class="main-wrapper" style="@(User.Identity != null && User.Identity.IsAuthenticated ? "" : "margin-left:0;")">
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <div class="top-header">
+                <span class="text-muted">@ViewData["Title"]</span>
+                <span class="small text-muted">@DateTime.Now.ToString("dddd, dd MMM yyyy")</span>
+            </div>
+        }
+
+        <div class="page-content">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - BusReservationERP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
