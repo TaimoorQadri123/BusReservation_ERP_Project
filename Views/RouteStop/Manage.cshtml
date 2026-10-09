@@ -2,63 +2,306 @@
 
 @{
     ViewData["Title"] = "Manage Stops";
+    int stopCount = Model.Stops?.Count() ?? 0;
 }
 
-<h2>Manage Stops — @ViewBag.RouteName</h2>
+<style>
+    .page-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
+
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .btn-soft {
+        background: #eff4ff;
+        color: #434655;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 9px 18px;
+    }
+
+        .btn-soft:hover {
+            background: #dce9ff;
+            color: #0b1c30;
+        }
+
+    .panel-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        overflow: hidden;
+    }
+
+        .panel-card .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+            padding: 16px 20px;
+            border-bottom: 1px solid #eef1fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-card .count-chip {
+            background: #dce9ff;
+            color: #0037b0;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 3px 12px;
+        }
+
+        .panel-card .table {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .panel-card thead th {
+            background: #eff4ff;
+            color: #434655;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #dce9ff;
+            padding: 12px 20px;
+            white-space: nowrap;
+        }
+
+        .panel-card tbody td {
+            padding: 12px 20px;
+            vertical-align: middle;
+            color: #0b1c30;
+            border-color: #eef1fa;
+        }
+
+        .panel-card tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+
+    .order-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #0037b0;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .stop-name {
+        font-weight: 600;
+    }
+
+    .btn-del {
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px 14px;
+    }
+
+    .add-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 20px;
+        position: sticky;
+        top: 80px;
+    }
+
+        .add-card .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0 0 4px 0;
+        }
+
+        .add-card .hint {
+            font-size: 13px;
+            color: #747685;
+            margin-bottom: 16px;
+        }
+
+        .add-card .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #434655;
+            margin-bottom: 6px;
+        }
+
+        .add-card .form-control {
+            border: 1px solid #d5dbec;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #0b1c30;
+            background-color: #f8f9ff;
+        }
+
+            .add-card .form-control:focus {
+                background-color: #fff;
+                border-color: #0037b0;
+                box-shadow: 0 0 0 3px #dce1ff;
+            }
+
+    .add-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 16px;
+        color: #747685;
+    }
+
+        .empty-state .big {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0b1c30;
+            margin-bottom: 4px;
+        }
+
+    @@media (max-width: 767px) {
+        .add-card {
+            position: static;
+            margin-top: 18px;
+        }
+
+        .panel-card {
+            overflow-x: auto;
+        }
+    }
+</style>
+
+<div class="page-head">
+    <div>
+        <h2>Manage Stops — @ViewBag.RouteName</h2>
+        <div class="sub">Stops are used for boarding and drop-off, in the order they are visited</div>
+    </div>
+    <a asp-controller="Route" asp-action="Index" class="btn btn-soft">Back to Routes</a>
+</div>
 
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Order</th>
-            <th>Stop Name</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Stops != null)
-        {
-            @foreach (var stop in Model.Stops)
-            {
-                <tr>
-                    <td>@stop.StopOrder</td>
-                    <td>@stop.StopName</td>
-                    <td>
-                        <form asp-controller="RouteStop" asp-action="Delete" method="post" style="display:inline">
-                            <input type="hidden" name="id" value="@stop.RouteStopId" />
-                            <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+<div class="row">
 
-<hr />
+    <!-- LEFT: Stops list -->
+    <div class="col-md-7">
+        <div class="panel-card">
+            <h3 class="card-title">
+                Route stops
+                <span class="count-chip">@stopCount stop@(stopCount == 1 ? "" : "s")</span>
+            </h3>
 
-<h4>Add New Stop</h4>
-
-<form asp-controller="RouteStop" asp-action="Create" method="post">
-
-    <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
-
-    <div class="mb-3">
-        <label class="form-label">Stop Name</label>
-        <input type="text" name="stopName" class="form-control" placeholder="e.g. Hyderabad" />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Stop Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (stopCount == 0)
+                    {
+                        <tr>
+                            <td colspan="3">
+                                <div class="empty-state">
+                                    <div class="big">No stops added yet</div>
+                                    <div>Add the first stop using the form.</div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var stop in Model.Stops!)
+                        {
+                            <tr>
+                                <td><span class="order-badge">@stop.StopOrder</span></td>
+                                <td class="stop-name">@stop.StopName</td>
+                                <td>
+                                    <form asp-controller="RouteStop" asp-action="Delete" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@stop.RouteStopId" />
+                                        <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
+                                        <button type="submit" class="btn btn-sm btn-danger btn-del">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Stop Order</label>
-        <input type="number" name="stopOrder" class="form-control" placeholder="e.g. 2" />
+    <!-- RIGHT: Add stop form -->
+    <div class="col-md-5">
+        <div class="add-card">
+            <h3 class="card-title">Add New Stop</h3>
+            <div class="hint">Give the stop a name and its position on the route</div>
+
+            <form asp-controller="RouteStop" asp-action="Create" method="post">
+
+                <input type="hidden" name="routeId" value="@ViewBag.RouteId" />
+
+                <div class="mb-3">
+                    <label class="form-label">Stop Name</label>
+                    <input type="text" name="stopName" class="form-control" placeholder="e.g. Hyderabad" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Stop Order</label>
+                    <input type="number" name="stopOrder" class="form-control" placeholder="e.g. 2" />
+                </div>
+
+                <div class="add-actions">
+                    <button type="submit" class="btn btn-brand">Add Stop</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Add Stop</button>
-    <a asp-controller="Route" asp-action="Index" class="btn btn-secondary">Back to Routes</a>
-
-</form>
+</div>

@@ -3,6 +3,9 @@
     public class DashboardViewModel
     {
         // Stat cards
+        // Stat cards
+        public int TotalTripsCount { get; set; }
+        //public int TodayTripsCount { get; set; }
         public int TodayTripsCount { get; set; }
         public int TodayBookingsCount { get; set; }
         public decimal TodayRevenue { get; set; }

@@ -5,38 +5,138 @@
     var cities = ViewBag.CityList as List<BusReservationERP.Models.City>;
 }
 
-<h2>Add New Route</h2>
+<style>
+    .page-head {
+        margin-bottom: 20px;
+    }
 
-<form asp-controller="Route" asp-action="Create" method="post">
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
 
-    <div class="mb-3">
-        <label class="form-label">Origin City</label>
-        <select asp-for="OriginCityId" id="originCity" class="form-control">
-            <option value="">-- Select Origin --</option>
-            @foreach (var city in cities!)
-            {
-                <option value="@city.CityId">@city.CityName</option>
+    .form-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 28px;
+        max-width: 720px;
+    }
+
+        .form-card .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #434655;
+            margin-bottom: 6px;
+        }
+
+        .form-card .form-control {
+            border: 1px solid #d5dbec;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #0b1c30;
+            background-color: #f8f9ff;
+        }
+
+            .form-card .form-control:focus {
+                background-color: #fff;
+                border-color: #0037b0;
+                box-shadow: 0 0 0 3px #dce1ff;
             }
-        </select>
-    </div>
 
-    <div class="mb-3">
-        <label class="form-label">Destination City</label>
-        <select asp-for="DestinationCityId" id="destinationCity" class="form-control">
-            <option value="">-- Select Destination --</option>
-            @foreach (var city in cities!)
-            {
-                <option value="@city.CityId">@city.CityName</option>
-            }
-        </select>
-    </div>
+        .form-card .text-danger {
+            font-size: 13px;
+        }
 
-    <button type="submit" class="btn btn-success">Save Route</button>
-    <a asp-controller="Route" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+        padding-top: 20px;
+        border-top: 1px solid #eef1fa;
+    }
 
-</form>
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .btn-soft {
+        background: #eff4ff;
+        color: #434655;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-soft:hover {
+            background: #dce9ff;
+            color: #0b1c30;
+        }
+</style>
+
+<div class="page-head">
+    <h2>Add New Route</h2>
+    <div class="sub">Pick where the route starts and where it ends</div>
+</div>
+
+<div class="form-card">
+    <form asp-controller="Route" asp-action="Create" method="post">
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Origin City</label>
+                <select asp-for="OriginCityId" id="originCity" class="form-control">
+                    <option value="">-- Select Origin --</option>
+                    @foreach (var city in cities!)
+                    {
+                        <option value="@city.CityId">@city.CityName</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Destination City</label>
+                <select asp-for="DestinationCityId" id="destinationCity" class="form-control">
+                    <option value="">-- Select Destination --</option>
+                    @foreach (var city in cities!)
+                    {
+                        <option value="@city.CityId">@city.CityName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-brand">Save Route</button>
+            <a asp-controller="Route" asp-action="Index" class="btn btn-soft">Cancel</a>
+        </div>
+
+    </form>
+</div>
 
 @section Scripts {
     <script>

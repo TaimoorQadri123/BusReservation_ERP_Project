@@ -4,19 +4,117 @@
     ViewData["Title"] = "Add City";
 }
 
-<h2>Add New City</h2>
+<style>
+    .page-head {
+        margin-bottom: 20px;
+    }
 
-<form asp-controller="City" asp-action="Create" method="post">
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
 
-    <div class="mb-3">
-        <label asp-for="CityName" class="form-label"></label>
-        <input asp-for="CityName" class="form-control" />
-        <span asp-validation-for="CityName" class="text-danger"></span>
-    </div>
+    .form-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 28px;
+        max-width: 560px;
+    }
 
-    <button type="submit" class="btn btn-success">Save City</button>
-    <a asp-controller="City" asp-action="Index" class="btn btn-secondary">Cancel</a>
+        .form-card .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #434655;
+            margin-bottom: 6px;
+        }
 
-</form>
+        .form-card .form-control {
+            border: 1px solid #d5dbec;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #0b1c30;
+            background-color: #f8f9ff;
+        }
+
+            .form-card .form-control:focus {
+                background-color: #fff;
+                border-color: #0037b0;
+                box-shadow: 0 0 0 3px #dce1ff;
+            }
+
+        .form-card .text-danger {
+            font-size: 13px;
+        }
+
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid #eef1fa;
+    }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .btn-soft {
+        background: #eff4ff;
+        color: #434655;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-soft:hover {
+            background: #dce9ff;
+            color: #0b1c30;
+        }
+</style>
+
+<div class="page-head">
+    <h2>Add New City</h2>
+    <div class="sub">Add a city so it can be used in routes and stops</div>
+</div>
+
+<div class="form-card">
+    <form asp-controller="City" asp-action="Create" method="post">
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="CityName" class="form-label"></label>
+            <input asp-for="CityName" class="form-control" />
+            <span asp-validation-for="CityName" class="text-danger"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-brand">Save City</button>
+            <a asp-controller="City" asp-action="Index" class="btn btn-soft">Cancel</a>
+        </div>
+
+    </form>
+</div>

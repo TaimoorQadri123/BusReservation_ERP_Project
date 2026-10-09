@@ -2,105 +2,530 @@
 
 @{
     ViewData["Title"] = "Dashboard";
+
+    // Decimal ko hamesha "." ke saath print karne ke liye (CSS width/gradient ke liye zaroori)
+    string F(double d) => d.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
+
+    int hour = DateTime.UtcNow.Hour;
+    string greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+
+    // Aaj ki overall occupancy
+    int todayBooked = Model.TodayTrips.Sum(t => t.BookedSeats);
+    int todayCapacity = Model.TodayTrips.Sum(t => t.TotalSeats);
+    double overallPct = todayCapacity > 0 ? (double)todayBooked / todayCapacity * 100 : 0;
+
+    // Payment donut
+    int totalPayments = Model.PaidCount + Model.PendingCount + Model.PartialCount;
+    double paidPct = totalPayments > 0 ? (double)Model.PaidCount / totalPayments * 100 : 0;
+    double partialPct = totalPayments > 0 ? (double)Model.PartialCount / totalPayments * 100 : 0;
+    double paidEnd = paidPct;
+    double partialEnd = paidPct + partialPct;
+    string donutStyle = totalPayments > 0
+        ? $"conic-gradient(#198754 0 {F(paidEnd)}%, #ffc107 {F(paidEnd)}% {F(partialEnd)}%, #dc3545 {F(partialEnd)}% 100%)"
+        : "conic-gradient(#e5eeff 0 100%)";
+
+    // Fleet bar
+    double activeW = Model.TotalBuses > 0 ? (double)Model.ActiveBuses / Model.TotalBuses * 100 : 0;
+    double maintW = Model.TotalBuses > 0 ? (double)Model.MaintenanceBuses / Model.TotalBuses * 100 : 0;
+    double inactiveW = Model.TotalBuses > 0 ? (double)Model.InactiveBuses / Model.TotalBuses * 100 : 0;
 }
 
 <style>
+    /* ===== Hero ===== */
+    .db-hero {
+        background: linear-gradient(120deg, #0037b0 0%, #00247d 100%);
+        border-radius: 14px;
+        padding: 26px 28px;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 14px rgba(0,55,176,0.22);
+    }
+
+        .db-hero h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+        }
+
+        .db-hero .sub {
+            font-size: 14px;
+            color: #c9d6ff;
+        }
+
+        .db-hero .occ-chip {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(255,255,255,0.14);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+    .hero-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+        .hero-actions a {
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 18px;
+            transition: background-color 0.15s;
+        }
+
+    .hero-btn-main {
+        background: #fff;
+        color: #0037b0;
+    }
+
+        .hero-btn-main:hover {
+            background: #dce9ff;
+            color: #00247d;
+        }
+
+    .hero-btn-ghost {
+        background: rgba(255,255,255,0.14);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.28);
+    }
+
+        .hero-btn-ghost:hover {
+            background: rgba(255,255,255,0.26);
+            color: #fff;
+        }
+
+    /* ===== Stat cards ===== */
     .stat-card {
         background: #fff;
         border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        border-left: 4px solid #0037b0;
+        padding: 18px 20px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
         height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 16px;
     }
-    .stat-card .stat-icon {
-        width: 48px; height: 48px;
-        border-radius: 10px;
-        background: #e5eeff;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 22px;
-    }
-    .stat-number { font-size: 28px; font-weight: 700; color: #0b1c30; }
-    .stat-label { font-size: 12px; text-transform: uppercase; color: #747685; letter-spacing: 0.03em; }
 
+        .stat-card .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #e5eeff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+    .stat-number {
+        font-size: 26px;
+        font-weight: 700;
+        color: #0b1c30;
+        line-height: 1.1;
+    }
+
+    .stat-label {
+        font-size: 13px;
+        color: #747685;
+        margin-top: 2px;
+    }
+
+    .stat-note {
+        font-size: 12px;
+        color: #0037b0;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    /* ===== Cards ===== */
     .dash-card {
         background: #fff;
         border-radius: 12px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
         padding: 20px;
         height: 100%;
     }
+
+        .dash-card .card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .dash-card h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
+
+    .count-chip {
+        background: #dce9ff;
+        color: #0037b0;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 999px;
+        padding: 3px 12px;
+        margin-left: 8px;
+    }
+
+    .link-btn {
+        background: #eff4ff;
+        color: #0037b0;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 14px;
+        text-decoration: none;
+    }
+
+        .link-btn:hover {
+            background: #0037b0;
+            color: #fff;
+            border-color: #0037b0;
+        }
+
+    .empty-note {
+        text-align: center;
+        padding: 32px 12px;
+        color: #747685;
+        font-size: 14px;
+    }
+
+        .empty-note .big {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0b1c30;
+            margin-bottom: 2px;
+        }
+
+    /* ===== Today's trips table ===== */
+    .trip-table {
+        font-size: 14px;
+        margin: 0;
+    }
+
+        .trip-table thead th {
+            background: #eff4ff;
+            color: #434655;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #dce9ff;
+            padding: 10px 12px;
+            white-space: nowrap;
+        }
+
+        .trip-table tbody td {
+            padding: 12px;
+            vertical-align: middle;
+            color: #0b1c30;
+            border-color: #eef1fa;
+        }
+
+        .trip-table tbody tr:hover {
+            background-color: #f8f9ff;
+        }
 
     .seat-progress {
         height: 6px;
         border-radius: 4px;
         background: #e5eeff;
         overflow: hidden;
-        width: 100px;
+        width: 110px;
+        margin-top: 4px;
     }
-    .seat-progress-bar { height: 100%; }
 
-    .status-badge { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
-    .status-scheduled { background: #dce1ff; color: #0037b0; }
-    .status-full { background: #ffdad6; color: #ba1a1a; }
-    .status-cancelled { background: #e5e5e5; color: #555; }
+    .seat-progress-bar {
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    .status-badge {
+        font-size: 12px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status-scheduled {
+        background: #dce1ff;
+        color: #0037b0;
+    }
+
+    .status-full {
+        background: #ffdad6;
+        color: #ba1a1a;
+    }
+
+    .status-cancelled {
+        background: #e9ebf3;
+        color: #555;
+    }
+
+    /* ===== Recent bookings ===== */
+    .booking-item {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #eef1fa;
+    }
+
+        .booking-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .booking-item:first-of-type {
+            padding-top: 0;
+        }
 
     .avatar-circle {
-        width: 36px; height: 36px; border-radius: 50%;
-        background: #dce1ff; color: #0037b0;
-        display: flex; align-items: center; justify-content: center;
-        font-weight: 700; font-size: 12px; flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #dce1ff;
+        color: #0037b0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 12px;
+        flex-shrink: 0;
     }
 
-    .payment-bar-segment { height: 100%; }
+    .booking-item .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .booking-item .name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #0b1c30;
+    }
+
+    .booking-item .time {
+        font-size: 12px;
+        color: #747685;
+        white-space: nowrap;
+    }
+
+    .booking-item .meta {
+        font-size: 12px;
+        color: #747685;
+    }
+
+    /* ===== Payment donut ===== */
+    .donut-wrap {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        flex-wrap: wrap;
+    }
+
+    .donut {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+        .donut::after {
+            content: "";
+            position: absolute;
+            inset: 24px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+    .donut-center {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .donut-center .n {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0b1c30;
+            line-height: 1;
+        }
+
+        .donut-center .t {
+            font-size: 12px;
+            color: #747685;
+            margin-top: 3px;
+        }
+
+    .legend-list {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .legend-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        background: #f8f9ff;
+        border-radius: 8px;
+        padding: 9px 12px;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+        .legend-row:last-child {
+            margin-bottom: 0;
+        }
+
+    .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+
+    .legend-row .cnt {
+        color: #747685;
+        font-size: 12px;
+        margin-left: 4px;
+    }
+
+    .legend-row .amt {
+        font-weight: 700;
+        color: #0b1c30;
+        white-space: nowrap;
+    }
+
+    /* ===== Fleet ===== */
+    .fleet-bar {
+        display: flex;
+        height: 10px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #e9ebf3;
+        margin-bottom: 16px;
+    }
+
+        .fleet-bar div {
+            height: 100%;
+        }
+
+    .fleet-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .fleet-box {
+        background: #f8f9ff;
+        border-radius: 10px;
+        padding: 14px 16px;
+    }
+
+        .fleet-box .lbl {
+            font-size: 13px;
+            color: #747685;
+            margin-bottom: 4px;
+        }
+
+        .fleet-box .num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1c30;
+            line-height: 1.1;
+        }
+
+        .fleet-box.total {
+            background: #eff4ff;
+            border: 1px solid #dce9ff;
+        }
+
+            .fleet-box.total .num {
+                color: #0037b0;
+            }
+
+    @@media (max-width: 767px) {
+        .db-hero {
+            padding: 20px;
+        }
+
+        .trip-wrap {
+            overflow-x: auto;
+        }
+    }
 </style>
 
-<h2 class="mb-1">Operations Overview</h2>
-<p class="text-muted mb-4">Live dispatch, seat occupancy, and ticketing metrics for today — @DateTime.Today.ToString("dd MMM yyyy")</p>
+<!-- Hero -->
+<div class="db-hero">
+    <div>
+        <h2>@greeting, Admin</h2>
+        <div class="sub">Operations overview for @DateTime.Today.ToString("dddd, dd MMM yyyy")</div>
+        <span class="occ-chip">Today's seat occupancy: @F(overallPct)% (@todayBooked / @todayCapacity)</span>
+    </div>
+    <div class="hero-actions">
+        <a asp-controller="Booking" asp-action="Create" class="hero-btn-main">+ New Booking</a>
+        <a asp-controller="Trip" asp-action="Create" class="hero-btn-ghost">+ Add Trip</a>
+        <a asp-controller="Bus" asp-action="Create" class="hero-btn-ghost">+ Add Bus</a>
+    </div>
+</div>
 
 <!-- Stat Cards -->
 <div class="row g-3 mb-4">
-    <div class="col-md-3">
+    <div class="col-md-6 col-xl-3">
         <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <div class="stat-label">Today's Trips</div>
-                    <div class="stat-number">@Model.TodayTripsCount</div>
-                </div>
-                <div class="stat-icon">🚌</div>
+            <div class="stat-icon">🚌</div>
+            <div>
+                <div class="stat-number">@Model.TotalTripsCount</div>
+                <div class="stat-label">Total trips</div>
+                <div class="stat-note">@Model.TodayTripsCount today</div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card" style="border-left-color:#006a63;">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <div class="stat-label">Today's Bookings</div>
-                    <div class="stat-number">@Model.TodayBookingsCount</div>
-                </div>
-                <div class="stat-icon" style="background:#d6f5ef;">🎟️</div>
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon" style="background:#d6f5ef;">🎟️</div>
+            <div>
+                <div class="stat-number">@Model.TodayBookingsCount</div>
+                <div class="stat-label">Today's bookings</div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card" style="border-left-color:#b7791f;">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <div class="stat-label">Today's Revenue</div>
-                    <div class="stat-number">Rs. @Model.TodayRevenue.ToString("N0")</div>
-                </div>
-                <div class="stat-icon" style="background:#fff3cd;">💰</div>
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon" style="background:#fff3cd;">💰</div>
+            <div>
+                <div class="stat-number">Rs. @Model.TodayRevenue.ToString("N0")</div>
+                <div class="stat-label">Today's revenue</div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card" style="border-left-color:#747685;">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <div class="stat-label">Available Seats Today</div>
-                    <div class="stat-number">@Model.AvailableSeatsToday</div>
-                </div>
-                <div class="stat-icon" style="background:#eceff3;">💺</div>
+    <div class="col-md-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon" style="background:#eceff3;">💺</div>
+            <div>
+                <div class="stat-number">@Model.AvailableSeatsToday</div>
+                <div class="stat-label">Available seats today</div>
             </div>
         </div>
     </div>
@@ -110,21 +535,24 @@
 <div class="row g-3 mb-4">
     <div class="col-lg-8">
         <div class="dash-card">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0">Today's Trips <span class="badge bg-light text-dark border">@Model.TodayTripsCount</span></h5>
-                <a asp-controller="Trip" asp-action="Index" class="small btn btn-primary">View All →</a>
+            <div class="card-head">
+                <h5>Today's Trips <span class="count-chip">@Model.TodayTripsCount</span></h5>
+                <a asp-controller="Trip" asp-action="Index" class="link-btn">View all trips</a>
             </div>
 
             @if (!Model.TodayTrips.Any())
             {
-                <p class="text-muted">today no trip was schedule.</p>
+                <div class="empty-note">
+                    <div class="big">No trips scheduled for today</div>
+                    <div>Add a trip to see it here.</div>
+                </div>
             }
             else
             {
-                <div class="table-responsive">
-                    <table class="table table-sm align-middle">
+                <div class="trip-wrap">
+                    <table class="table trip-table">
                         <thead>
-                            <tr class="text-muted small text-uppercase">
+                            <tr>
                                 <th>Bus</th>
                                 <th>Route</th>
                                 <th>Departure</th>
@@ -144,11 +572,9 @@
                                     <td>@trip.Route</td>
                                     <td>@trip.DepartureTime</td>
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="small">@trip.BookedSeats / @trip.TotalSeats</span>
-                                            <div class="seat-progress">
-                                                <div class="seat-progress-bar" style="width:@pct%; background-color:@barColor;"></div>
-                                            </div>
+                                        <span class="small">@trip.BookedSeats / @trip.TotalSeats</span>
+                                        <div class="seat-progress">
+                                            <div class="seat-progress-bar" style="width:@(F(pct))%; background-color:@barColor;"></div>
                                         </div>
                                     </td>
                                     <td><span class="status-badge @badgeClass">@trip.Status</span></td>
@@ -163,25 +589,34 @@
 
     <div class="col-lg-4">
         <div class="dash-card">
-            <h5 class="mb-3">Recent Bookings</h5>
+            <div class="card-head">
+                <h5>Recent Bookings</h5>
+                <a asp-controller="Booking" asp-action="Index" class="link-btn">View all</a>
+            </div>
 
             @if (!Model.RecentBookings.Any())
             {
-                <p class="text-muted">Not Booking Still yet..</p>
+                <div class="empty-note">
+                    <div class="big">No bookings yet</div>
+                    <div>New bookings will show up here.</div>
+                </div>
             }
             else
             {
-                @foreach (var b in Model.RecentBookings)
+                foreach (var b in Model.RecentBookings)
                 {
-                    <div class="d-flex align-items-start gap-2 mb-3 pb-3 border-bottom">
-                        <div class="avatar-circle">@(b.PassengerName.Length >= 2 ? b.PassengerName.Substring(0, 2).ToUpper() : b.PassengerName.ToUpper())</div>
+                    string pname = b.PassengerName ?? "";
+                    string initials = pname.Length >= 2 ? pname.Substring(0, 2).ToUpper() : pname.ToUpper();
+
+                    <div class="booking-item">
+                        <div class="avatar-circle">@initials</div>
                         <div class="flex-grow-1">
-                            <div class="d-flex justify-content-between">
-                                <strong class="small">@b.PassengerName</strong>
-                                <span class="small text-muted">@b.CreatedAt.ToString("hh:mm tt")</span>
+                            <div class="top">
+                                <span class="name">@b.PassengerName</span>
+                                <span class="time">@b.CreatedAt.ToString("hh:mm tt")</span>
                             </div>
-                            <div class="small text-muted">@b.SeatCount seat@(b.SeatCount > 1 ? "s" : "") • @b.BusNumber</div>
-                            <div class="small text-muted">@b.Route</div>
+                            <div class="meta">@b.SeatCount seat@(b.SeatCount > 1 ? "s" : "") • @b.BusNumber</div>
+                            <div class="meta">@b.Route</div>
                         </div>
                     </div>
                 }
@@ -192,76 +627,67 @@
 
 <!-- Payment Breakdown + Fleet Status -->
 <div class="row g-3">
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <div class="dash-card">
-            <h5 class="mb-3">Payment Status Breakdown</h5>
-
-            @{
-                int totalPayments = Model.PaidCount + Model.PendingCount + Model.PartialCount;
-                double paidPct = totalPayments > 0 ? (double)Model.PaidCount / totalPayments * 100 : 0;
-                double pendingPct = totalPayments > 0 ? (double)Model.PendingCount / totalPayments * 100 : 0;
-                double partialPct = totalPayments > 0 ? (double)Model.PartialCount / totalPayments * 100 : 0;
-            }
-
-            <div class="d-flex" style="height:10px; border-radius:6px; overflow:hidden; background:#eee;">
-                <div class="payment-bar-segment" style="width:@paidPct%; background:#198754;"></div>
-                <div class="payment-bar-segment" style="width:@pendingPct%; background:#dc3545;"></div>
-                <div class="payment-bar-segment" style="width:@partialPct%; background:#ffc107;"></div>
+            <div class="card-head">
+                <h5>Payment Status Breakdown</h5>
             </div>
 
-            <div class="mt-3">
-                <div class="d-flex justify-content-between align-items-center p-2 rounded mb-2" style="background:#f8f9fa;">
-                    <div><span class="badge" style="background:#198754;">&nbsp;</span> Paid <span class="text-muted small">(@Model.PaidCount bookings)</span></div>
-                    <strong>Rs. @Model.PaidAmount.ToString("N0")</strong>
+            <div class="donut-wrap">
+                <div class="donut" style="background:@Html.Raw(donutStyle);">
+                    <div class="donut-center">
+                        <div class="n">@totalPayments</div>
+                        <div class="t">bookings</div>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center p-2 rounded mb-2" style="background:#f8f9fa;">
-                    <div><span class="badge" style="background:#dc3545;">&nbsp;</span> Pending <span class="text-muted small">(@Model.PendingCount bookings)</span></div>
-                    <strong>Rs. @Model.PendingAmount.ToString("N0")</strong>
-                </div>
-                <div class="d-flex justify-content-between align-items-center p-2 rounded" style="background:#f8f9fa;">
-                    <div><span class="badge" style="background:#ffc107;">&nbsp;</span> Partial <span class="text-muted small">(@Model.PartialCount bookings)</span></div>
-                    <strong>Rs. @Model.PartialAmount.ToString("N0")</strong>
+
+                <div class="legend-list">
+                    <div class="legend-row">
+                        <div><span class="dot" style="background:#198754;"></span>Paid<span class="cnt">(@Model.PaidCount)</span></div>
+                        <span class="amt">Rs. @Model.PaidAmount.ToString("N0")</span>
+                    </div>
+                    <div class="legend-row">
+                        <div><span class="dot" style="background:#dc3545;"></span>Pending<span class="cnt">(@Model.PendingCount)</span></div>
+                        <span class="amt">Rs. @Model.PendingAmount.ToString("N0")</span>
+                    </div>
+                    <div class="legend-row">
+                        <div><span class="dot" style="background:#ffc107;"></span>Partial<span class="cnt">(@Model.PartialCount)</span></div>
+                        <span class="amt">Rs. @Model.PartialAmount.ToString("N0")</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <div class="dash-card">
-            <h5 class="mb-3">Fleet Status <span class="badge bg-light text-dark border">@Model.TotalBuses buses total</span></h5>
+            <div class="card-head">
+                <h5>Fleet Status <span class="count-chip">@Model.TotalBuses buses total</span></h5>
+                <a asp-controller="Bus" asp-action="Index" class="link-btn">Manage buses</a>
+            </div>
 
-            <div class="row g-2">
-                <div class="col-6">
-                    <div class="p-3 rounded" style="background:#f8f9fa;">
-                        <div class="d-flex justify-content-between small text-muted mb-1">
-                            <span><span class="badge" style="background:#198754;">&nbsp;</span> Active</span>
-                        </div>
-                        <div class="fs-4 fw-bold">@Model.ActiveBuses</div>
-                    </div>
+            <div class="fleet-bar">
+                <div style="width:@(F(activeW))%; background:#198754;"></div>
+                <div style="width:@(F(maintW))%; background:#ffc107;"></div>
+                <div style="width:@(F(inactiveW))%; background:#6c757d;"></div>
+            </div>
+
+            <div class="fleet-grid">
+                <div class="fleet-box">
+                    <div class="lbl"><span class="dot" style="background:#198754;"></span>Active</div>
+                    <div class="num">@Model.ActiveBuses</div>
                 </div>
-                <div class="col-6">
-                    <div class="p-3 rounded" style="background:#f8f9fa;">
-                        <div class="d-flex justify-content-between small text-muted mb-1">
-                            <span><span class="badge" style="background:#ffc107;">&nbsp;</span> Maintenance</span>
-                        </div>
-                        <div class="fs-4 fw-bold">@Model.MaintenanceBuses</div>
-                    </div>
+                <div class="fleet-box">
+                    <div class="lbl"><span class="dot" style="background:#ffc107;"></span>Maintenance</div>
+                    <div class="num">@Model.MaintenanceBuses</div>
                 </div>
-                <div class="col-6">
-                    <div class="p-3 rounded" style="background:#f8f9fa;">
-                        <div class="d-flex justify-content-between small text-muted mb-1">
-                            <span><span class="badge" style="background:#6c757d;">&nbsp;</span> Inactive</span>
-                        </div>
-                        <div class="fs-4 fw-bold">@Model.InactiveBuses</div>
-                    </div>
+                <div class="fleet-box">
+                    <div class="lbl"><span class="dot" style="background:#6c757d;"></span>Inactive</div>
+                    <div class="num">@Model.InactiveBuses</div>
                 </div>
-                <div class="col-6">
-                    <div class="p-3 rounded" style="background:#f8f9fa;">
-                        <div class="d-flex justify-content-between small text-muted mb-1">
-                            <span>Total</span>
-                        </div>
-                        <div class="fs-4 fw-bold">@Model.TotalBuses</div>
-                    </div>
+                <div class="fleet-box total">
+                    <div class="lbl">Total</div>
+                    <div class="num">@Model.TotalBuses</div>
                 </div>
             </div>
         </div>

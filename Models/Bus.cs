@@ -7,7 +7,7 @@
         public string BusType { get; set; } = string.Empty;     // "AC" / "Non-AC"
         public int TotalSeats { get; set; }
         public string Status { get; set; } = "Active";          // Active / Maintenance / Inactive
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property — ek Bus ke multiple Trips ho sakte hain
         public ICollection<Trip>? Trips { get; set; }

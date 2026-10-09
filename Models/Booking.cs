@@ -22,7 +22,7 @@
 
         public string BookingStatus { get; set; } = "Booked"; // Booked / Cancelled / NoShow
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         //public Payment? Payment { get; set; }
     }

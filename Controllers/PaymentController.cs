@@ -67,7 +67,7 @@ namespace BusReservationERP.Controllers
 
             if (payment.Status == "Paid" || payment.Status == "Partial")
             {
-                payment.PaidAt = DateTime.Now;
+                payment.PaidAt = DateTime.UtcNow;
             }
 
             _context.Payments.Add(payment);
@@ -112,7 +112,7 @@ namespace BusReservationERP.Controllers
 
             if (payment.Status == "Paid" || payment.Status == "Partial")
             {
-                payment.PaidAt = DateTime.Now;
+                payment.PaidAt = DateTime.UtcNow;
             }
             else
             {

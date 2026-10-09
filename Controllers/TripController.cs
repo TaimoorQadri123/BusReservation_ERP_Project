@@ -102,11 +102,21 @@ namespace BusReservationERP.Controllers
                 return View(vm);
             }
 
+            //var trip = new Trip
+            //{
+            //    BusId = vm.BusId,
+            //    RouteId = vm.RouteId,
+            //    DepartureDate = vm.DepartureDate,
+            //    DepartureTime = vm.DepartureTime,
+            //    Fare = vm.Fare,
+            //    AvailableSeats = selectedBus.TotalSeats,
+            //    Status = "Scheduled"
+            //};
             var trip = new Trip
             {
                 BusId = vm.BusId,
                 RouteId = vm.RouteId,
-                DepartureDate = vm.DepartureDate,
+                DepartureDate = DateTime.SpecifyKind(vm.DepartureDate, DateTimeKind.Utc),
                 DepartureTime = vm.DepartureTime,
                 Fare = vm.Fare,
                 AvailableSeats = selectedBus.TotalSeats,
@@ -199,7 +209,9 @@ namespace BusReservationERP.Controllers
 
             trip.BusId = vm.BusId;
             trip.RouteId = vm.RouteId;
-            trip.DepartureDate = vm.DepartureDate;
+            //trip.DepartureDate = vm.DepartureDate;
+            trip.DepartureDate =
+    DateTime.SpecifyKind(vm.DepartureDate, DateTimeKind.Utc);
             trip.DepartureTime = vm.DepartureTime;
             trip.Fare = vm.Fare;
 

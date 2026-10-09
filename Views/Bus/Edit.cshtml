@@ -4,44 +4,142 @@
     ViewData["Title"] = "Edit Bus";
 }
 
-<h2>Edit Bus</h2>
+<style>
+    .page-head {
+        margin-bottom: 20px;
+    }
 
-<form asp-controller="Bus" asp-action="Edit" method="post">
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
 
-    <input type="hidden" asp-for="BusId" />
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+    .form-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 28px;
+        max-width: 640px;
+    }
 
-    <div class="mb-3">
-        <label asp-for="BusNumber" class="form-label"></label>
-        <input asp-for="BusNumber" class="form-control" />
-        <span asp-validation-for="BusNumber" class="text-danger"></span>
-    </div>
+        .form-card .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #434655;
+            margin-bottom: 6px;
+        }
 
-    <div class="mb-3">
-        <label asp-for="BusType" class="form-label"></label>
-        <select asp-for="BusType" class="form-control">
-            <option value="AC">AC</option>
-            <option value="Non-AC">Non-AC</option>
-        </select>
-    </div>
+        .form-card .form-control {
+            border: 1px solid #d5dbec;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #0b1c30;
+            background-color: #f8f9ff;
+        }
 
-    <div class="mb-3">
-        <label asp-for="TotalSeats" class="form-label"></label>
-        <input asp-for="TotalSeats" class="form-control" />
-        <span asp-validation-for="TotalSeats" class="text-danger"></span>
-    </div>
+            .form-card .form-control:focus {
+                background-color: #fff;
+                border-color: #0037b0;
+                box-shadow: 0 0 0 3px #dce1ff;
+            }
 
-    <div class="mb-3">
-        <label asp-for="Status" class="form-label"></label>
-        <select asp-for="Status" class="form-control">
-            <option value="Active">Active</option>
-            <option value="Maintenance">Maintenance</option>
-            <option value="Inactive">Inactive</option>
-        </select>
-    </div>
+        .form-card .text-danger {
+            font-size: 13px;
+        }
 
-    <button type="submit" class="btn btn-success">Update Bus</button>
-    <a asp-controller="Bus" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid #eef1fa;
+    }
 
-</form>
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 9px 22px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .btn-soft {
+        background: #eff4ff;
+        color: #434655;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 9px 22px;
+    }
+
+        .btn-soft:hover {
+            background: #dce9ff;
+            color: #0b1c30;
+        }
+</style>
+
+<div class="page-head">
+    <h2>Edit Bus</h2>
+    <div class="sub">Update bus details, type, capacity or status</div>
+</div>
+
+<div class="form-card">
+    <form asp-controller="Bus" asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="BusId" />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="BusNumber" class="form-label"></label>
+            <input asp-for="BusNumber" class="form-control" />
+            <span asp-validation-for="BusNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="BusType" class="form-label"></label>
+            <select asp-for="BusType" class="form-control">
+                <option value="AC">AC</option>
+                <option value="Non-AC">Non-AC</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TotalSeats" class="form-label"></label>
+            <input asp-for="TotalSeats" class="form-control" />
+            <span asp-validation-for="TotalSeats" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-brand">Update Bus</button>
+            <a asp-controller="Bus" asp-action="Index" class="btn btn-soft">Cancel</a>
+        </div>
+
+    </form>
+</div>

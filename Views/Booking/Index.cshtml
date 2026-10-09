@@ -4,90 +4,396 @@
     ViewData["Title"] = "Booking List";
 }
 
-<h2>Booking List</h2>
+<style>
+    .page-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
+
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 9px 18px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .stat-box {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 14px 18px;
+        border-left: 4px solid #0037b0;
+    }
+
+        .stat-box.ok {
+            border-left-color: #198754;
+        }
+
+        .stat-box.bad {
+            border-left-color: #dc3545;
+        }
+
+        .stat-box .num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1c30;
+            line-height: 1.1;
+        }
+
+        .stat-box .lbl {
+            font-size: 13px;
+            color: #747685;
+        }
+
+    .table-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        overflow: hidden;
+    }
+
+        .table-card .table {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .table-card thead th {
+            background: #eff4ff;
+            color: #434655;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #dce9ff;
+            padding: 12px 14px;
+            white-space: nowrap;
+        }
+
+        .table-card tbody td {
+            padding: 12px 14px;
+            vertical-align: middle;
+            color: #0b1c30;
+            border-color: #eef1fa;
+        }
+
+        .table-card tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+
+        .table-card tbody tr.row-cancelled td {
+            color: #747685;
+        }
+
+    .passenger-name {
+        font-weight: 600;
+    }
+
+    .passenger-phone {
+        font-size: 12px;
+        color: #747685;
+    }
+
+    .seat-chip {
+        display: inline-block;
+        background: #dce9ff;
+        color: #0037b0;
+        font-weight: 600;
+        font-size: 12px;
+        border-radius: 6px;
+        padding: 2px 8px;
+        margin: 0 4px 4px 0;
+    }
+
+    .seat-count {
+        display: block;
+        font-size: 12px;
+        color: #747685;
+    }
+
+    .trip-bus {
+        font-weight: 600;
+    }
+
+    .trip-when {
+        font-size: 12px;
+        color: #747685;
+    }
+
+    .pill {
+        display: inline-block;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        white-space: nowrap;
+    }
+
+    .pill-confirmed {
+        background: #d1f2de;
+        color: #146c43;
+    }
+
+    .pill-cancelled {
+        background: #fde2e4;
+        color: #b02a37;
+    }
+
+    .pill-other {
+        background: #dce9ff;
+        color: #0037b0;
+    }
+
+    .pill-paid {
+        background: #d1f2de;
+        color: #146c43;
+    }
+
+    .pill-partial {
+        background: #fff0c2;
+        color: #8a6100;
+    }
+
+    .pill-pending {
+        background: #fde2e4;
+        color: #b02a37;
+    }
+
+    .pill-none {
+        background: #e9ebf3;
+        color: #434655;
+    }
+
+    .action-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+    }
+
+        .action-wrap form {
+            margin: 0;
+        }
+
+        .action-wrap .btn {
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 12px;
+            white-space: nowrap;
+        }
+
+    .btn-pay {
+        background: #0037b0;
+        color: #fff;
+    }
+
+        .btn-pay:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 48px 16px;
+        color: #747685;
+    }
+
+        .empty-state .big {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0b1c30;
+            margin-bottom: 4px;
+        }
+
+    @@media (max-width: 767px) {
+        .table-card {
+            overflow-x: auto;
+        }
+    }
+</style>
+
+@{
+    int totalBookings = Model.Count;
+    int cancelledCount = Model.Count(g => g.BookingStatus == "Cancelled");
+    int activeCount = totalBookings - cancelledCount;
+    int totalSeats = Model.Where(g => g.BookingStatus != "Cancelled").Sum(g => g.SeatNumbers.Count);
+}
+
+<div class="page-head">
+    <div>
+        <h2>Booking List</h2>
+        <div class="sub">All passenger bookings, grouped by reservation</div>
+    </div>
+    <a asp-controller="Booking" asp-action="Create" class="btn btn-brand">+ New Booking</a>
+</div>
 
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<a asp-controller="Booking" asp-action="Create" class="btn btn-primary mb-3">+ New Booking</a>
+<div class="stat-row">
+    <div class="stat-box">
+        <div class="num">@totalBookings</div>
+        <div class="lbl">Total bookings</div>
+    </div>
+    <div class="stat-box ok">
+        <div class="num">@activeCount</div>
+        <div class="lbl">Active bookings</div>
+    </div>
+    <div class="stat-box">
+        <div class="num">@totalSeats</div>
+        <div class="lbl">Seats booked</div>
+    </div>
+    <div class="stat-box bad">
+        <div class="num">@cancelledCount</div>
+        <div class="lbl">Cancelled</div>
+    </div>
+</div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Passenger</th>
-            <th>Phone</th>
-            <th>Seats</th>
-            <th>Trip</th>
-            <th>Boarding</th>
-            <th>Drop</th>
-            <th>Status</th>
-            <th>Payment</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var group in Model)
-        {
+<div class="table-card">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@group.PassengerName</td>
-                <td>@group.PassengerPhone</td>
-                <td>
-                    @string.Join(", ", group.SeatNumbers)
-                    <span class="badge bg-secondary">@group.SeatNumbers.Count seat@(group.SeatNumbers.Count > 1 ? "s" : "")</span>
-                </td>
-                <td>
-                    @group.Trip?.Bus?.BusNumber
-                    (@group.Trip?.DepartureDate.ToString("dd-MMM-yyyy") @group.Trip?.DepartureTime)
-                </td>
-                <td>@group.BoardingStop?.StopName</td>
-                <td>@group.DropStop?.StopName</td>
-                <td>@group.BookingStatus</td>
-                <td>
-                    @if (group.BookingStatus != "Cancelled")
-                    {
-                        <form asp-controller="Booking" asp-action="Cancel" method="post" style="display:inline">
-                            <input type="hidden" name="id" value="@group.SampleBookingId" />
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Do you want to cancel this entire booking (all seats)?');">
-                                Cancel All
-                            </button>
-                        </form>
-
-                        <a asp-controller="Payment" asp-action="Create" asp-route-groupId="@group.BookingGroupId" class="btn btn-sm btn-primary">
-                            Add Payment
-                        </a>
-                    }
-
-                    <form asp-controller="Booking" asp-action="Delete" method="post" style="display:inline">
-                        <input type="hidden" name="id" value="@group.SampleBookingId" />
-                        <button type="submit" class="btn btn-sm btn-outline-danger mt-1"
-                                onclick="return confirm('Do you want to permanently delete this booking record? This action cannot be undone.');">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-                <td>@group.BookingStatus</td>
-                <td>
-                    @if (group.PaymentStatus == "Not Recorded")
-                    {
-                        <span class="badge bg-secondary">Not Recorded</span>
-                    }
-                    else if (group.PaymentStatus == "Paid")
-                    {
-                        <span class="badge bg-success">Paid (@group.PaymentAmount)</span>
-                    }
-                    else if (group.PaymentStatus == "Partial")
-                    {
-                        <span class="badge bg-warning text-dark">Partial (@group.PaymentAmount)</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-danger">Pending</span>
-                    }
-                </td>
+                <th>Passenger</th>
+                <th>Seats</th>
+                <th>Trip</th>
+                <th>Boarding</th>
+                <th>Drop</th>
+                <th>Status</th>
+                <th>Payment</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="8">
+                        <div class="empty-state">
+                            <div class="big">No bookings yet</div>
+                            <div>Create the first booking to see it here.</div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+            @foreach (var group in Model)
+            {
+                <tr class="@(group.BookingStatus == "Cancelled" ? "row-cancelled" : "")">
+                    <td>
+                        <div class="passenger-name">@group.PassengerName</div>
+                        <div class="passenger-phone">@group.PassengerPhone</div>
+                    </td>
+
+                    <td>
+                        @foreach (var seat in group.SeatNumbers)
+                        {
+                            <span class="seat-chip">@seat</span>
+                        }
+                        <span class="seat-count">@group.SeatNumbers.Count seat@(group.SeatNumbers.Count > 1 ? "s" : "")</span>
+                    </td>
+
+                    <td>
+                        <div class="trip-bus">@group.Trip?.Bus?.BusNumber</div>
+                        <div class="trip-when">@group.Trip?.DepartureDate.ToString("dd-MMM-yyyy") @group.Trip?.DepartureTime</div>
+                    </td>
+
+                    <td>@group.BoardingStop?.StopName</td>
+                    <td>@group.DropStop?.StopName</td>
+
+                    <td>
+                        @if (group.BookingStatus == "Cancelled")
+                        {
+                            <span class="pill pill-cancelled">@group.BookingStatus</span>
+                        }
+                        else if (group.BookingStatus == "Confirmed")
+                        {
+                            <span class="pill pill-confirmed">@group.BookingStatus</span>
+                        }
+                        else
+                        {
+                            <span class="pill pill-other">@group.BookingStatus</span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (group.PaymentStatus == "Not Recorded")
+                        {
+                            <span class="pill pill-none">Not Recorded</span>
+                        }
+                        else if (group.PaymentStatus == "Paid")
+                        {
+                            <span class="pill pill-paid">Paid (@group.PaymentAmount)</span>
+                        }
+                        else if (group.PaymentStatus == "Partial")
+                        {
+                            <span class="pill pill-partial">Partial (@group.PaymentAmount)</span>
+                        }
+                        else
+                        {
+                            <span class="pill pill-pending">Pending</span>
+                        }
+                    </td>
+
+                    <td>
+                        <div class="action-wrap">
+                            @if (group.BookingStatus != "Cancelled")
+                            {
+                                <a asp-controller="Payment" asp-action="Create" asp-route-groupId="@group.BookingGroupId" class="btn btn-sm btn-pay">
+                                    Add Payment
+                                </a>
+
+                                <form asp-controller="Booking" asp-action="Cancel" method="post">
+                                    <input type="hidden" name="id" value="@group.SampleBookingId" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Do you want to cancel this entire booking (all seats)?');">
+                                        Cancel All
+                                    </button>
+                                </form>
+                            }
+
+                            <form asp-controller="Booking" asp-action="Delete" method="post">
+                                <input type="hidden" name="id" value="@group.SampleBookingId" />
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Do you want to permanently delete this booking record? This action cannot be undone.');">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

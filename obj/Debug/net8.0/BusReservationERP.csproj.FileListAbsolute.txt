@@ -150,3 +150,5 @@ E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\refint\BusReservationER
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.pdb
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\BusReservationERP.genruntimeconfig.cache
 E:\Users\source\repos\BusReservationERP\obj\Debug\net8.0\ref\BusReservationERP.dll
+E:\Users\source\repos\BusReservationERP\bin\Debug\net8.0\Npgsql.dll
+E:\Users\source\repos\BusReservationERP\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

@@ -3,80 +3,180 @@
   "WorkspaceRootPath": "E:\\Users\\source\\repos\\BusReservationERP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\booking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\booking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\viewmodels\\bookinggroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:viewmodels\\bookinggroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\payment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\payment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\payment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\payment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\trip\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\trip\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008102936_InitialNeonDate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20261008102936_InitialNeonDate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\routestop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\routestop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\city.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\city.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\busroute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\busroute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\models\\bus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:models\\bus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008093727_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20261008093727_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008092657_InitialNeon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20261008092657_InitialNeon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\payment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\payment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\payment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\payment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\routestop\\manage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\routestop\\manage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\city\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\city\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\city\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\city\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\route\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\route\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\route\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\route\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\route\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\route\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\trip\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\trip\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\trip\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\trip\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\bus\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\bus\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\bus\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\bus\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\bus\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\bus\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\views\\booking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:views\\booking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\viewmodels\\bookinggroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:viewmodels\\bookinggroupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\viewmodels\\bookingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:viewmodels\\bookingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\migrations\\20260916101146_addfiltereduniqueindexforbookings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:migrations\\20260916101146_addfiltereduniqueindexforbookings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\migrations\\20260929081118_addbookinggroupid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:migrations\\20260929081118_addbookinggroupid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|e:\\users\\source\\repos\\busreservationerp\\migrations\\20261008094109_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B53245-85E7-5DD4-3027-D5E29E83BAC3}|BusReservationERP.csproj|solutionrelative:migrations\\20261008094109_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,7 +186,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -94,111 +194,549 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAwwBYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentController.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "Controllers\\PaymentController.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAkwH8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T08:23:24.511Z",
+              "WhenOpened": "2026-10-07T06:48:02.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Dashboard\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Dashboard\\Index.cshtml",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Dashboard\\Index.cshtml",
-              "RelativeToolTip": "Views\\Dashboard\\Index.cshtml",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAhwHkAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-10-07T08:22:47.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Controllers\\DashboardController.cs",
               "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\DashboardController.cs",
               "RelativeToolTip": "Controllers\\DashboardController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwGkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAvwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-07T08:17:04.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DashboardViewModel.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\DashboardViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\DashboardViewModel.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\DashboardViewModel.cs",
-              "RelativeToolTip": "ViewModels\\DashboardViewModel.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAxwDIAAAABAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "20261008102936_InitialNeonDate.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008102936_InitialNeonDate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20261008102936_InitialNeonDate.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008102936_InitialNeonDate.cs",
+              "RelativeToolTip": "Migrations\\20261008102936_InitialNeonDate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T08:16:32.186Z",
+              "WhenOpened": "2026-10-08T10:29:36.586Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Booking\\Create.cshtml",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Create.cshtml",
-              "RelativeToolTip": "Views\\Booking\\Create.cshtml",
-              "ViewState": "AgIAAJsAAAAAAAAAAAAAwDgBAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-29T06:37:56.71Z",
+              "DocumentIndex": 6,
+              "Title": "BookingController.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\BookingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BookingController.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\BookingController.cs",
+              "RelativeToolTip": "Controllers\\BookingController.cs",
+              "ViewState": "AgIAADoBAAAAAAAAAAAkwFcBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T07:04:25.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DbSeeder.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\DbSeeder.cs",
+              "RelativeDocumentMoniker": "Data\\DbSeeder.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\DbSeeder.cs",
+              "RelativeToolTip": "Data\\DbSeeder.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAhwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T09:46:49.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "TripController.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\TripController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TripController.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\TripController.cs",
+              "RelativeToolTip": "Controllers\\TripController.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAvwNUAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:35:24.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "Models\\Booking.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Booking.cs",
+              "RelativeToolTip": "Models\\Booking.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAcwBwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-29T07:42:40.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trip\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Create.cshtml",
+              "RelativeToolTip": "Views\\Trip\\Create.cshtml",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAK0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:37:54.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAAAJAAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAHsBAAAAAAAAAAAawIkBAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-10-07T09:10:28.56Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "20261007064657_UpdatePaymentForGroupBooking.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs",
-              "RelativeDocumentMoniker": "Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs",
-              "RelativeToolTip": "Migrations\\20261007064657_UpdatePaymentForGroupBooking.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T06:46:57.722Z",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAArwAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T08:22:47.849Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAqwBgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T09:29:10.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:28:52.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "BusRoute.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\BusRoute.cs",
+              "RelativeDocumentMoniker": "Models\\BusRoute.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\BusRoute.cs",
+              "RelativeToolTip": "Models\\BusRoute.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:28:46.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "City.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\City.cs",
+              "RelativeDocumentMoniker": "Models\\City.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\City.cs",
+              "RelativeToolTip": "Models\\City.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:28:50.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "RouteStop.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\RouteStop.cs",
+              "RelativeDocumentMoniker": "Models\\RouteStop.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\RouteStop.cs",
+              "RelativeToolTip": "Models\\RouteStop.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:28:59.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Trip.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Trip.cs",
+              "RelativeDocumentMoniker": "Models\\Trip.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Trip.cs",
+              "RelativeToolTip": "Models\\Trip.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:29:01.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Bus.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Bus.cs",
+              "RelativeDocumentMoniker": "Models\\Bus.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Bus.cs",
+              "RelativeToolTip": "Models\\Bus.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAzwAkAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T10:28:37.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-08T09:12:10.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "Models\\Payment.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Payment.cs",
+              "RelativeToolTip": "Models\\Payment.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA1wA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-07T06:34:12.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-08T09:46:45.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAowEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T10:08:36.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "20261008094109_InitialCreate.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008094109_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20261008094109_InitialCreate.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008094109_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20261008094109_InitialCreate.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T09:41:09.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "20261008093727_InitialCreate.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008093727_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20261008093727_InitialCreate.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008093727_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20261008093727_InitialCreate.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T09:37:27.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20261008092657_InitialNeon1.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008092657_InitialNeon1.cs",
+              "RelativeDocumentMoniker": "Migrations\\20261008092657_InitialNeon1.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20261008092657_InitialNeon1.cs",
+              "RelativeToolTip": "Migrations\\20261008092657_InitialNeon1.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T09:26:57.718Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAEcBAAAAAAAAAIBJwFsBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:53:13.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Manage.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\RouteStop\\Manage.cshtml",
+              "RelativeDocumentMoniker": "Views\\RouteStop\\Manage.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\RouteStop\\Manage.cshtml",
+              "RelativeToolTip": "Views\\RouteStop\\Manage.cshtml",
+              "ViewState": "AgIAAB4BAAAAAAAAAIBJwC0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:43:10.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\City\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\City\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\City\\Create.cshtml",
+              "RelativeToolTip": "Views\\City\\Create.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAIBJwHcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:42:22.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payment\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Create.cshtml",
+              "RelativeToolTip": "Views\\Payment\\Create.cshtml",
+              "ViewState": "AgIAAKMAAAAAAAAAAIBJwLQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T06:50:24.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payment\\Edit.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Payment\\Edit.cshtml",
+              "ViewState": "AgIAAKEAAAAAAAAAAIBJwLUAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T06:50:59.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\City\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\City\\Index.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\City\\Index.cshtml",
+              "RelativeToolTip": "Views\\City\\Index.cshtml",
+              "ViewState": "AgIAAI0AAAAAAAAAAIBJwKEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:41:54.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Route\\Edit.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Route\\Edit.cshtml",
+              "ViewState": "AgIAAJAAAAAAAAAAAIBJwJ4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:40:55.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Route\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Create.cshtml",
+              "RelativeToolTip": "Views\\Route\\Create.cshtml",
+              "ViewState": "AgIAAJIAAAAAAAAAAIBJwKYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:40:43.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Route\\Index.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Route\\Index.cshtml",
+              "RelativeToolTip": "Views\\Route\\Index.cshtml",
+              "ViewState": "AgIAAMYAAAAAAAAAAIBJwNoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:39:49.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trip\\Edit.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Trip\\Edit.cshtml",
+              "ViewState": "AgIAAJsAAAAAAAAAAIBJwK8AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:38:08.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trip\\Index.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Trip\\Index.cshtml",
+              "RelativeToolTip": "Views\\Trip\\Index.cshtml",
+              "ViewState": "AgIAADQBAAAAAAAAAIBJwEgBAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:37:27.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Bus\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Create.cshtml",
+              "RelativeToolTip": "Views\\Bus\\Create.cshtml",
+              "ViewState": "AgIAAHYAAAAAAAAAAIBJwIoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:30:52.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Bus\\Index.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Index.cshtml",
+              "RelativeToolTip": "Views\\Bus\\Index.cshtml",
+              "ViewState": "AgIAANkAAAAAAAAAAIBJwPwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:28:22.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Booking\\Create.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Create.cshtml",
+              "RelativeToolTip": "Views\\Booking\\Create.cshtml",
+              "ViewState": "AgIAANMBAAAAAAAAAIBJwN0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-09-29T06:37:56.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Bus\\Edit.cshtml",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Bus\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Bus\\Edit.cshtml",
+              "ViewState": "AgIAAHwAAAAAAAAAAIBJwJAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-08T08:31:01.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA3wA4AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-07T08:16:32.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Booking\\Index.cshtml",
               "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Booking\\Index.cshtml",
               "RelativeToolTip": "Views\\Booking\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAAHoBAAAAAAAAAIBJwIgBAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-09-16T07:09:39.797Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 40,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAswBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-07T08:23:24.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
               "Title": "BookingGroupViewModel.cs",
               "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\BookingGroupViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\BookingGroupViewModel.cs",
@@ -211,130 +749,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BookingController.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\BookingController.cs",
-              "RelativeDocumentMoniker": "Controllers\\BookingController.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\BookingController.cs",
-              "RelativeToolTip": "Controllers\\BookingController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAUwB0AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T07:04:25.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PaymentController.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\PaymentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PaymentController.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Controllers\\PaymentController.cs",
-              "RelativeToolTip": "Controllers\\PaymentController.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAgwH8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T06:48:02.386Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Payment\\Create.cshtml",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Create.cshtml",
-              "RelativeToolTip": "Views\\Payment\\Create.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAcwDAAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-10-07T06:50:24.726Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Payment\\Edit.cshtml",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Views\\Payment\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Payment\\Edit.cshtml",
-              "ViewState": "AgIAABwAAAAAAAAAAAAcwDEAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-10-07T06:50:59.051Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Payment.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Payment.cs",
-              "RelativeDocumentMoniker": "Models\\Payment.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Payment.cs",
-              "RelativeToolTip": "Models\\Payment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-07T06:34:12.22Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Booking.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Booking.cs",
-              "RelativeDocumentMoniker": "Models\\Booking.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Models\\Booking.cs",
-              "RelativeToolTip": "Models\\Booking.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwBsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T07:42:40.092Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 42,
               "Title": "BookingViewModel.cs",
               "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\BookingViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\BookingViewModel.cs",
               "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\ViewModels\\BookingViewModel.cs",
               "RelativeToolTip": "ViewModels\\BookingViewModel.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAywB8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAADwvx8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T07:11:58.264Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAA9wBgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T10:08:36.735Z",
+              "WhenOpened": "2026-09-29T07:11:58.264Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "20260929081118_AddBookingGroupId.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20260929081118_AddBookingGroupId.cs",
-              "RelativeDocumentMoniker": "Migrations\\20260929081118_AddBookingGroupId.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20260929081118_AddBookingGroupId.cs",
-              "RelativeToolTip": "Migrations\\20260929081118_AddBookingGroupId.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T08:11:19.392Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "20260916101146_AddFilteredUniqueIndexForBookings.cs",
-              "DocumentMoniker": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20260916101146_AddFilteredUniqueIndexForBookings.cs",
-              "RelativeDocumentMoniker": "Migrations\\20260916101146_AddFilteredUniqueIndexForBookings.cs",
-              "ToolTip": "E:\\Users\\source\\repos\\BusReservationERP\\Migrations\\20260916101146_AddFilteredUniqueIndexForBookings.cs",
-              "RelativeToolTip": "Migrations\\20260916101146_AddFilteredUniqueIndexForBookings.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T10:11:47.628Z"
             }
           ]
         }

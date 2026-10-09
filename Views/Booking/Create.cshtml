@@ -5,23 +5,193 @@
 }
 
 <style>
-    .seat-legend { display: flex; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; }
-    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 14px; }
-    .legend-box { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
-    .legend-available { background-color: #28a745; }
-    .legend-booked { background-color: #dc3545; }
-    .legend-selected { background-color: #007bff; }
+    .page-head {
+        margin-bottom: 20px;
+    }
+
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
+
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
+
+    /* ===== Form cards ===== */
+    .form-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 24px;
+        margin-bottom: 18px;
+    }
+
+        .form-card .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0 0 16px 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef1fa;
+        }
+
+        .form-card .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #434655;
+            margin-bottom: 6px;
+        }
+
+        .form-card .form-control {
+            border: 1px solid #d5dbec;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #0b1c30;
+            background-color: #f8f9ff;
+        }
+
+            .form-card .form-control:focus {
+                background-color: #fff;
+                border-color: #0037b0;
+                box-shadow: 0 0 0 3px #dce1ff;
+            }
+
+        .form-card .text-danger {
+            font-size: 13px;
+        }
+
+    /* ===== Selected seats summary ===== */
+    #selectedSeatsSummary {
+        background: #eff4ff;
+        border: 1px solid #dce9ff;
+        border-left: 4px solid #0037b0;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0b1c30;
+    }
+
+    /* ===== Buttons ===== */
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .btn-soft {
+        background: #eff4ff;
+        color: #434655;
+        border: 1px solid #dce9ff;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 10px 24px;
+    }
+
+        .btn-soft:hover {
+            background: #dce9ff;
+            color: #0b1c30;
+        }
+
+    /* ===== Seat map ===== */
+    .seat-legend {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #434655;
+    }
+
+    .legend-box {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+
+    .legend-available {
+        background-color: #28a745;
+    }
+
+    .legend-booked {
+        background-color: #dc3545;
+    }
+
+    .legend-selected {
+        background-color: #0037b0;
+    }
 
     .seat-map-card {
-        background: #f8f9fa;
+        background: #fff;
         border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
         padding: 20px;
         position: sticky;
-        top: 20px;
+        top: 80px;
+    }
+
+        .seat-map-card .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0 0 4px 0;
+        }
+
+        .seat-map-card .hint {
+            font-size: 13px;
+            color: #747685;
+            margin-bottom: 14px;
+        }
+
+    .bus-body {
+        background: #f8f9ff;
+        border: 1px solid #dce9ff;
+        border-radius: 14px;
+        padding: 14px;
+    }
+
+    .driver-box {
+        background: #dce9ff;
+        color: #0037b0;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        width: fit-content;
+        margin-bottom: 14px;
     }
 
     .seat-map-scroll-area {
-        max-height: 480px;
+        max-height: 460px;
         overflow-y: auto;
         padding-right: 6px;
     }
@@ -37,98 +207,107 @@
     .seat-btn {
         height: 42px;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         color: white;
-        font-weight: bold;
+        font-weight: 600;
         cursor: pointer;
         font-size: 13px;
+        transition: background-color 0.15s;
     }
 
-    .seat-available { background-color: #28a745; }
-    .seat-available:hover { background-color: #218838; }
-    .seat-booked { background-color: #dc3545; cursor: not-allowed; opacity: 0.8; }
-    .seat-selected { background-color: #007bff !important; box-shadow: 0 0 0 2px #0056b3; }
-
-    .driver-box {
-        background: #e2e3e5;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: bold;
-        width: fit-content;
-        margin-bottom: 15px;
+    .seat-available {
+        background-color: #28a745;
     }
 
-    #selectedSeatsSummary {
-        background: #e7f1ff;
-        border: 1px solid #b6d4fe;
-        border-radius: 8px;
-        padding: 10px 14px;
-        margin-top: 12px;
-        font-size: 14px;
+        .seat-available:hover {
+            background-color: #218838;
+        }
+
+    .seat-booked {
+        background-color: #dc3545;
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+
+    .seat-selected {
+        background-color: #0037b0 !important;
+        box-shadow: 0 0 0 3px #dce1ff;
     }
 
     @@media (max-width: 767px) {
         .seat-map-card {
             position: static;
-            margin-top: 20px;
+            margin-top: 6px;
         }
     }
 </style>
 
-<h2>New Passenger Booking</h2>
+<div class="page-head">
+    <h2>New Passenger Booking</h2>
+    <div class="sub">Choose a trip, set the stops, add passenger details and pick seats</div>
+</div>
 
 <form asp-controller="Booking" asp-action="Create" method="post">
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
     <div class="row">
 
         <!-- LEFT SIDE: Form Fields -->
         <div class="col-md-7">
 
-            <div class="mb-3">
-                <label class="form-label">Select Trip</label>
-                <select asp-for="TripId" id="tripSelect" class="form-control">
-                    <option value="">-- Select Trip --</option>
-                    @foreach (var trip in Model.TripList!)
-                    {
-                        <option value="@trip.TripId">
-                            @trip.Bus?.BusNumber | @trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName
-                            | @trip.DepartureDate.ToString("dd-MMM-yyyy") @trip.DepartureTime
-                            | Seats Left: @trip.AvailableSeats
-                        </option>
-                    }
-                </select>
-                <span asp-validation-for="TripId" class="text-danger"></span>
+            <div class="form-card">
+                <h3 class="card-title">Trip and stops</h3>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Trip</label>
+                    <select asp-for="TripId" id="tripSelect" class="form-control">
+                        <option value="">-- Select Trip --</option>
+                        @foreach (var trip in Model.TripList!)
+                        {
+                            <option value="@trip.TripId">
+                                @trip.Bus?.BusNumber | @trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName
+                                | @trip.DepartureDate.ToString("dd-MMM-yyyy") @trip.DepartureTime
+                                | Seats Left: @trip.AvailableSeats
+                            </option>
+                        }
+                    </select>
+                    <span asp-validation-for="TripId" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Boarding Stop</label>
+                        <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
+                            <option value="">-- Please select a trip first. --</option>
+                        </select>
+                        <span asp-validation-for="BoardingStopId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Drop Stop</label>
+                        <select asp-for="DropStopId" id="dropSelect" class="form-control">
+                            <option value="">-- Please select a boarding stop first. --</option>
+                        </select>
+                        <span asp-validation-for="DropStopId" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Boarding Stop</label>
-                <select asp-for="BoardingStopId" id="boardingSelect" class="form-control">
-                    <option value="">-- Please select a trip first. --</option>
-                </select>
-                <span asp-validation-for="BoardingStopId" class="text-danger"></span>
-            </div>
+            <div class="form-card">
+                <h3 class="card-title">Passenger details</h3>
 
-            <div class="mb-3">
-                <label class="form-label">Drop Stop</label>
-                <select asp-for="DropStopId" id="dropSelect" class="form-control">
-                    <option value="">-- Please select a boarding stop first. --</option>
-                </select>
-                <span asp-validation-for="DropStopId" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="PassengerName" class="form-label"></label>
+                    <input asp-for="PassengerName" class="form-control" placeholder="e.g. Ahmed Khan + Family" />
+                    <span asp-validation-for="PassengerName" class="text-danger"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="PassengerName" class="form-label"></label>
-                <input asp-for="PassengerName" class="form-control" placeholder="e.g. Ahmed Khan + Family" />
-                <span asp-validation-for="PassengerName" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="PassengerPhone" class="form-label"></label>
-                <input asp-for="PassengerPhone" class="form-control" />
-                <span asp-validation-for="PassengerPhone" class="text-danger"></span>
+                <div class="mb-1">
+                    <label asp-for="PassengerPhone" class="form-label"></label>
+                    <input asp-for="PassengerPhone" class="form-control" />
+                    <span asp-validation-for="PassengerPhone" class="text-danger"></span>
+                </div>
             </div>
 
             <!-- Selected seats yahan hidden inputs ke tor pe add/remove honge JavaScript se -->
@@ -137,9 +316,9 @@
             <div id="selectedSeatsSummary">No seat has been selected yet..</div>
             <span asp-validation-for="SelectedSeats" class="text-danger"></span>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-success">Save Booking</button>
-                <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Cancel</a>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-brand">Save Booking</button>
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-soft">Cancel</a>
             </div>
 
         </div>
@@ -147,20 +326,22 @@
         <!-- RIGHT SIDE: Seat Map -->
         <div class="col-md-5">
 
-            <label class="form-label">Select Seat(s)</label>
-            <p class="text-muted" style="font-size: 13px;">Multiple seats can be selected (for family/group bookings)..</p>
-
-            <div class="seat-legend">
-                <div class="legend-item"><div class="legend-box legend-available"></div> Available</div>
-                <div class="legend-item"><div class="legend-box legend-booked"></div> Booked</div>
-                <div class="legend-item"><div class="legend-box legend-selected"></div> Selected</div>
-            </div>
-
             <div class="seat-map-card">
-                <div class="driver-box">🚌 Driver</div>
-                <div class="seat-map-scroll-area">
-                    <div id="seatMapContainer">
-                        <p class="text-muted">Please select a trip first.</p>
+                <h3 class="card-title">Select Seat(s)</h3>
+                <div class="hint">Multiple seats can be selected (for family/group bookings).</div>
+
+                <div class="seat-legend">
+                    <div class="legend-item"><div class="legend-box legend-available"></div> Available</div>
+                    <div class="legend-item"><div class="legend-box legend-booked"></div> Booked</div>
+                    <div class="legend-item"><div class="legend-box legend-selected"></div> Selected</div>
+                </div>
+
+                <div class="bus-body">
+                    <div class="driver-box">🚌 Driver</div>
+                    <div class="seat-map-scroll-area">
+                        <div id="seatMapContainer">
+                            <p class="text-muted">Please select a trip first.</p>
+                        </div>
                     </div>
                 </div>
             </div>

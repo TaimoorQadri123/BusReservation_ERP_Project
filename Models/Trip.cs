@@ -18,7 +18,7 @@
 
         public string Status { get; set; } = "Scheduled"; // Scheduled / Full / Departed / Cancelled / Completed
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property — ek Trip ki multiple Bookings ho sakti hain
         public ICollection<Booking>? Bookings { get; set; }

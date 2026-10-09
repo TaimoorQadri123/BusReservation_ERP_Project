@@ -4,62 +4,326 @@
     ViewData["Title"] = "Trip List";
 }
 
-<h2>Trip List</h2>
+<style>
+    .page-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
+        }
+
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 9px 18px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .stat-box {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 14px 18px;
+        border-left: 4px solid #0037b0;
+    }
+
+        .stat-box.ok {
+            border-left-color: #198754;
+        }
+
+        .stat-box.bad {
+            border-left-color: #dc3545;
+        }
+
+        .stat-box .num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1c30;
+            line-height: 1.1;
+        }
+
+        .stat-box .lbl {
+            font-size: 13px;
+            color: #747685;
+        }
+
+    .table-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        overflow: hidden;
+    }
+
+        .table-card .table {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .table-card thead th {
+            background: #eff4ff;
+            color: #434655;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #dce9ff;
+            padding: 12px 14px;
+            white-space: nowrap;
+        }
+
+        .table-card tbody td {
+            padding: 12px 14px;
+            vertical-align: middle;
+            color: #0b1c30;
+            border-color: #eef1fa;
+        }
+
+        .table-card tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+
+        .table-card tbody tr.row-cancelled td {
+            color: #747685;
+        }
+
+    .bus-number {
+        font-weight: 600;
+    }
+
+    .route-cell {
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .seats-chip {
+        display: inline-block;
+        background: #dce9ff;
+        color: #0037b0;
+        font-weight: 600;
+        font-size: 12px;
+        border-radius: 6px;
+        padding: 3px 10px;
+    }
+
+    .pill {
+        display: inline-block;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        white-space: nowrap;
+    }
+
+    .pill-active {
+        background: #d1f2de;
+        color: #146c43;
+    }
+
+    .pill-cancelled {
+        background: #fde2e4;
+        color: #b02a37;
+    }
+
+    .pill-done {
+        background: #e9ebf3;
+        color: #434655;
+    }
+
+    .pill-other {
+        background: #dce9ff;
+        color: #0037b0;
+    }
+
+    .action-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+    }
+
+        .action-wrap form {
+            margin: 0;
+        }
+
+        .action-wrap .btn {
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 12px;
+            white-space: nowrap;
+        }
+
+    .btn-edit {
+        background: #eff4ff;
+        color: #0037b0;
+        border: 1px solid #dce9ff;
+        font-weight: 600;
+    }
+
+        .btn-edit:hover {
+            background: #0037b0;
+            color: #fff;
+            border-color: #0037b0;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 48px 16px;
+        color: #747685;
+    }
+
+        .empty-state .big {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0b1c30;
+            margin-bottom: 4px;
+        }
+
+    @@media (max-width: 767px) {
+        .table-card {
+            overflow-x: auto;
+        }
+    }
+</style>
+
+@{
+    int totalTrips = Model.Count;
+    int cancelledTrips = Model.Count(t => t.Status == "Cancelled");
+    int activeTrips = totalTrips - cancelledTrips;
+}
+
+<div class="page-head">
+    <div>
+        <h2>Trip List</h2>
+        <div class="sub">Scheduled departures, fares and seat availability</div>
+    </div>
+    <a asp-controller="Trip" asp-action="Create" class="btn btn-brand">+ Add New Trip</a>
+</div>
 
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<a asp-controller="Trip" asp-action="Create" class="btn btn-primary mb-3">+ Add New Trip</a>
+<div class="stat-row">
+    <div class="stat-box">
+        <div class="num">@totalTrips</div>
+        <div class="lbl">Total trips</div>
+    </div>
+    <div class="stat-box ok">
+        <div class="num">@activeTrips</div>
+        <div class="lbl">Not cancelled</div>
+    </div>
+    <div class="stat-box bad">
+        <div class="num">@cancelledTrips</div>
+        <div class="lbl">Cancelled</div>
+    </div>
+</div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Bus Number</th>
-            <th>Route</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Fare</th>
-            <th>Available Seats</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var trip in Model)
-        {
+<div class="table-card">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@trip.Bus?.BusNumber</td>
-                <td>@trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName</td>
-                <td>@trip.DepartureDate.ToString("dd-MMM-yyyy")</td>
-                <td>@trip.DepartureTime</td>
-                <td>@trip.Fare</td>
-                <td>@trip.AvailableSeats</td>
-                <td>@trip.Status</td>
-                <td>
-                    @if (trip.Status != "Cancelled")
-                    {
-                        <a asp-controller="Trip" asp-action="Edit" asp-route-id="@trip.TripId" class="btn btn-sm btn-warning">Edit</a>
-
-                        <form asp-controller="Trip" asp-action="Cancel" method="post" style="display:inline">
-                            <input type="hidden" name="id" value="@trip.TripId" />
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Kya aap is trip ko cancel karna chahte hain?');">
-                                Cancel
-                            </button>
-                        </form>
-                    }
-
-                    <form asp-controller="Trip" asp-action="Delete" method="post" style="display:inline">
-                        <input type="hidden" name="id" value="@trip.TripId" />
-                        <button type="submit" class="btn btn-sm btn-outline-danger"
-                                onclick="return confirm('Kya aap is trip ko poori tarah delete karna chahte hain? Ye wapas nahi ho sakta.');">
-                            Delete
-                        </button>
-                    </form>
-                </td>
+                <th>Bus Number</th>
+                <th>Route</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Fare</th>
+                <th>Available Seats</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="8">
+                        <div class="empty-state">
+                            <div class="big">No trips scheduled yet</div>
+                            <div>Add a trip to start taking bookings.</div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+            @foreach (var trip in Model)
+            {
+                <tr class="@(trip.Status == "Cancelled" ? "row-cancelled" : "")">
+                    <td class="bus-number">@trip.Bus?.BusNumber</td>
+                    <td class="route-cell">@trip.Route?.OriginCity?.CityName → @trip.Route?.DestinationCity?.CityName</td>
+                    <td>@trip.DepartureDate.ToString("dd-MMM-yyyy")</td>
+                    <td>@trip.DepartureTime</td>
+                    <td>@trip.Fare</td>
+                    <td><span class="seats-chip">@trip.AvailableSeats</span></td>
+                    <td>
+                        @{
+                            var tripStatus = trip.Status?.ToString() ?? "";
+                            var tripPill = tripStatus.ToLower() switch
+                            {
+                                "cancelled" => "pill-cancelled",
+                                "scheduled" => "pill-active",
+                                "active" => "pill-active",
+                                "completed" => "pill-done",
+                                _ => "pill-other"
+                            };
+                        }
+                        <span class="pill @tripPill">@trip.Status</span>
+                    </td>
+                    <td>
+                        <div class="action-wrap">
+                            @if (trip.Status != "Cancelled")
+                            {
+                                <a asp-controller="Trip" asp-action="Edit" asp-route-id="@trip.TripId" class="btn btn-sm btn-edit">Edit</a>
+
+                                <form asp-controller="Trip" asp-action="Cancel" method="post">
+                                    <input type="hidden" name="id" value="@trip.TripId" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Kya aap is trip ko cancel karna chahte hain?');">
+                                        Cancel
+                                    </button>
+                                </form>
+                            }
+
+                            <form asp-controller="Trip" asp-action="Delete" method="post">
+                                <input type="hidden" name="id" value="@trip.TripId" />
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Kya aap is trip ko poori tarah delete karna chahte hain? Ye wapas nahi ho sakta.');">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

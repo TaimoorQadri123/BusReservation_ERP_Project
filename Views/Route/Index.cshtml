@@ -4,29 +4,216 @@
     ViewData["Title"] = "Route List";
 }
 
-<h2>Route List</h2>
+<style>
+    .page-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
 
-<a asp-controller="Route" asp-action="Create" class="btn btn-primary mb-3">+ Add New Route</a>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var route in Model)
-        {
-            <tr>
-                <td>@route.OriginCity?.CityName</td>
-                <td>@route.DestinationCity?.CityName</td>
-                <td>
-                    <a asp-controller="Route" asp-action="Edit" asp-route-id="@route.RouteId" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-controller="RouteStop" asp-action="Manage" asp-route-routeId="@route.RouteId" class="btn btn-sm btn-info">Manage Stops</a>
-                </td>
-            </tr>
+        .page-head h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1c30;
+            margin: 0;
         }
-    </tbody>
-</table>
+
+        .page-head .sub {
+            font-size: 13px;
+            color: #747685;
+            margin-top: 2px;
+        }
+
+    .btn-brand {
+        background: #0037b0;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 9px 18px;
+    }
+
+        .btn-brand:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .stat-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .stat-box {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        padding: 14px 18px;
+        border-left: 4px solid #0037b0;
+    }
+
+        .stat-box .num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1c30;
+            line-height: 1.1;
+        }
+
+        .stat-box .lbl {
+            font-size: 13px;
+            color: #747685;
+        }
+
+    .table-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        overflow: hidden;
+    }
+
+        .table-card .table {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .table-card thead th {
+            background: #eff4ff;
+            color: #434655;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #dce9ff;
+            padding: 12px 14px;
+            white-space: nowrap;
+        }
+
+        .table-card tbody td {
+            padding: 12px 14px;
+            vertical-align: middle;
+            color: #0b1c30;
+            border-color: #eef1fa;
+        }
+
+        .table-card tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+
+    .city-name {
+        font-weight: 600;
+    }
+
+    .action-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+    }
+
+        .action-wrap .btn {
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 14px;
+            white-space: nowrap;
+        }
+
+    .btn-edit {
+        background: #eff4ff;
+        color: #0037b0;
+        border: 1px solid #dce9ff;
+    }
+
+        .btn-edit:hover {
+            background: #0037b0;
+            color: #fff;
+            border-color: #0037b0;
+        }
+
+    .btn-stops {
+        background: #0037b0;
+        color: #fff;
+        border: 1px solid #0037b0;
+    }
+
+        .btn-stops:hover {
+            background: #00247d;
+            color: #fff;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 48px 16px;
+        color: #747685;
+    }
+
+        .empty-state .big {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0b1c30;
+            margin-bottom: 4px;
+        }
+
+    @@media (max-width: 767px) {
+        .table-card {
+            overflow-x: auto;
+        }
+    }
+</style>
+
+<div class="page-head">
+    <div>
+        <h2>Route List</h2>
+        <div class="sub">Origin and destination pairs, with their stops</div>
+    </div>
+    <a asp-controller="Route" asp-action="Create" class="btn btn-brand">+ Add New Route</a>
+</div>
+
+<div class="stat-row">
+    <div class="stat-box">
+        <div class="num">@Model.Count</div>
+        <div class="lbl">Total routes</div>
+    </div>
+</div>
+
+<div class="table-card">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="3">
+                        <div class="empty-state">
+                            <div class="big">No routes added yet</div>
+                            <div>Add a route, then manage its stops.</div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+            @foreach (var route in Model)
+            {
+                <tr>
+                    <td class="city-name">@route.OriginCity?.CityName</td>
+                    <td class="city-name">@route.DestinationCity?.CityName</td>
+                    <td>
+                        <div class="action-wrap">
+                            <a asp-controller="Route" asp-action="Edit" asp-route-id="@route.RouteId" class="btn btn-sm btn-edit">Edit</a>
+                            <a asp-controller="RouteStop" asp-action="Manage" asp-route-routeId="@route.RouteId" class="btn btn-sm btn-stops">Manage Stops</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

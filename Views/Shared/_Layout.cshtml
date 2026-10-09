@@ -10,173 +10,400 @@
     <style>
             body {
                 background-color: #f8f9ff;
+                color: #0b1c30;
             }
 
+            /* ===== Sidebar ===== */
             .sidebar {
                 position: fixed;
                 left: 0;
                 top: 0;
                 bottom: 0;
-                width: 240px;
+                width: 250px;
                 background-color: #eff4ff;
                 box-shadow: 1px 0 6px rgba(0,0,0,0.05);
                 z-index: 100;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                overflow-y: auto;
+                transition: transform 0.2s ease;
             }
 
             .sidebar-brand {
-                padding: 20px 20px;
+                padding: 22px 20px 18px 20px;
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 12px;
+                border-bottom: 1px solid #dce9ff;
+                margin-bottom: 12px;
             }
 
                 .sidebar-brand .icon {
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 8px;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
                     background: #0037b0;
                     color: #fff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 18px;
+                    font-size: 20px;
+                    box-shadow: 0 2px 8px rgba(0,55,176,0.3);
                 }
 
                 .sidebar-brand .title {
                     font-weight: 700;
                     font-size: 16px;
                     color: #0b1c30;
-                    line-height: 1;
+                    line-height: 1.1;
                 }
 
                 .sidebar-brand .subtitle {
-                    font-size: 10px;
-                    text-transform: uppercase;
+                    font-size: 12px;
                     color: #747685;
-                    letter-spacing: 0.05em;
+                    margin-top: 2px;
                 }
 
             .sidebar-nav {
                 padding: 0 12px;
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 3px;
+                flex: 1;
             }
 
-                .sidebar-nav a {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 10px 14px;
-                    border-radius: 8px;
-                    color: #434655;
-                    text-decoration: none;
-                    font-size: 14px;
-                    font-weight: 500;
-                    transition: all 0.15s;
+            .nav-group-label {
+                font-size: 12px;
+                font-weight: 600;
+                color: #747685;
+                padding: 14px 14px 6px 14px;
+            }
+
+            .sidebar-nav a {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 14px;
+                border-radius: 8px;
+                color: #434655;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                transition: background-color 0.15s, color 0.15s;
+            }
+
+                .sidebar-nav a .nav-icon {
+                    width: 22px;
+                    text-align: center;
+                    font-size: 16px;
+                    flex-shrink: 0;
                 }
 
-                    .sidebar-nav a:hover {
-                        background-color: #dce9ff;
-                        color: #0b1c30;
-                    }
+                .sidebar-nav a:hover {
+                    background-color: #dce9ff;
+                    color: #0b1c30;
+                }
 
-                    .sidebar-nav a.active {
-                        background-color: #0037b0;
-                        color: #fff;
-                        font-weight: 600;
-                    }
+                .sidebar-nav a.active {
+                    background-color: #0037b0;
+                    color: #fff;
+                    font-weight: 600;
+                    box-shadow: 0 2px 8px rgba(0,55,176,0.25);
+                }
 
             .sidebar-footer {
-                padding: 16px;
+                padding: 14px 16px;
+                border-top: 1px solid #dce9ff;
+                display: flex;
+                align-items: center;
+                gap: 10px;
             }
 
+                .sidebar-footer .mini-avatar {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    background: #0037b0;
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 13px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                }
+
+                .sidebar-footer .who {
+                    min-width: 0;
+                }
+
+                .sidebar-footer .role {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #0b1c30;
+                    line-height: 1.2;
+                }
+
+                .sidebar-footer .mail {
+                    font-size: 12px;
+                    color: #747685;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(11,28,48,0.45);
+                z-index: 95;
+            }
+
+            /* ===== Main area ===== */
             .main-wrapper {
-                margin-left: 240px;
+                margin-left: 250px;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
             }
 
+            /* ===== Top header ===== */
             .top-header {
+                position: sticky;
+                top: 0;
+                z-index: 90;
                 background: #fff;
-                box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-                padding: 12px 24px;
+                box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+                padding: 10px 24px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                min-height: 60px;
             }
+
+            .header-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .top-header .page-title {
+                font-weight: 700;
+                font-size: 17px;
+                color: #0b1c30;
+            }
+
+            .menu-btn {
+                display: none;
+                width: 38px;
+                height: 38px;
+                border-radius: 8px;
+                border: 1px solid #dce9ff;
+                background: #eff4ff;
+                color: #0037b0;
+                font-size: 18px;
+                line-height: 1;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+            }
+
+                .menu-btn:hover {
+                    background: #dce9ff;
+                }
+
+            .date-chip {
+                background: #eff4ff;
+                color: #434655;
+                font-size: 13px;
+                font-weight: 500;
+                border-radius: 999px;
+                padding: 6px 14px;
+            }
+
+            .avatar-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: none;
+                background: #0037b0;
+                color: #fff;
+                font-weight: 700;
+                font-size: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 0 0 3px #dce1ff;
+            }
+
+                .avatar-btn:hover {
+                    background: #00247d;
+                }
+
+            .profile-dropdown {
+                min-width: 250px;
+                border: none;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                border-radius: 10px;
+                padding: 8px;
+            }
+
+                .profile-dropdown .profile-head {
+                    padding: 10px 12px;
+                    border-bottom: 1px solid #eee;
+                    margin-bottom: 6px;
+                    list-style: none;
+                }
+
+                .profile-dropdown .dropdown-item {
+                    border-radius: 6px;
+                    font-size: 14px;
+                    padding: 8px 12px;
+                }
+
+                    .profile-dropdown .dropdown-item:hover {
+                        background-color: #eff4ff;
+                    }
+
+                .profile-dropdown form {
+                    margin: 0;
+                }
 
             .page-content {
                 padding: 24px;
                 flex: 1;
             }
 
+            /* ===== Mobile ===== */
             @@media (max-width: 767px) {
                 .sidebar {
-                    display: none;
+                    transform: translateX(-100%);
+                }
+
+                    .sidebar.open {
+                        transform: translateX(0);
+                        box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+                    }
+
+                .sidebar-overlay.show {
+                    display: block;
                 }
 
                 .main-wrapper {
                     margin-left: 0;
+                }
+
+                .menu-btn {
+                    display: flex;
+                }
+
+                .top-header {
+                    padding: 10px 16px;
+                }
+
+                .page-content {
+                    padding: 16px;
                 }
             }
     </style>
 </head>
 <body>
 
-    @if (User.Identity != null && User.Identity.IsAuthenticated)
-    {
-        <aside class="sidebar">
-            <div>
-                <div class="sidebar-brand">
-                    <div class="icon">🚌</div>
-                    <div>
-                        <div class="title">BusReservationERP</div>
-                        <div class="subtitle">Admin Panel</div>
-                    </div>
-                </div>
+    @{
+        bool isLoggedIn = User.Identity != null && User.Identity.IsAuthenticated;
+        string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        string userEmail = User.Identity?.Name ?? "";
+        string userInitial = userEmail.Length > 0 ? userEmail.Substring(0, 1).ToUpper() : "A";
 
-                <nav class="sidebar-nav">
-                    <a asp-controller="Dashboard" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
-                        Dashboard
-                    </a>
-                    <a asp-controller="Bus" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Bus" ? "active" : "")">
-                         Buses
-                    </a>
-                    <a asp-controller="City" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "City" ? "active" : "")">
-                         Cities
-                    </a>
-                    <a asp-controller="Route" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Route" ? "active" : "")">
-                         Routes
-                    </a>
-                    <a asp-controller="Trip" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Trip" ? "active" : "")">
-                         Trips
-                    </a>
-                    <a asp-controller="Booking" asp-action="Index" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")">
-                         Bookings
-                    </a>
-                </nav>
+        // Related pages ke liye sahi menu highlight ho (RouteStop -> Routes, Payment -> Bookings)
+        bool isRoutes = currentController == "Route" || currentController == "RouteStop";
+        bool isBookings = currentController == "Booking" || currentController == "Payment";
+    }
+
+    @if (isLoggedIn)
+    {
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <aside class="sidebar" id="appSidebar">
+            <div class="sidebar-brand">
+                <div class="icon">🚌</div>
+                <div>
+                    <div class="title">BusReservationERP</div>
+                    <div class="subtitle">Admin Panel</div>
+                </div>
             </div>
 
+            <nav class="sidebar-nav">
+                <a asp-controller="Dashboard" asp-action="Index" class="@(currentController == "Dashboard" ? "active" : "")">
+                     Dashboard
+                </a>
+
+                <div class="nav-group-label">Fleet and network</div>
+                <a asp-controller="Bus" asp-action="Index" class="@(currentController == "Bus" ? "active" : "")">
+                     Buses
+                </a>
+                <a asp-controller="City" asp-action="Index" class="@(currentController == "City" ? "active" : "")">
+                     Cities
+                </a>
+                <a asp-controller="Route" asp-action="Index" class="@(isRoutes ? "active" : "")">
+                     Routes
+                </a>
+
+                <div class="nav-group-label">Sales</div>
+                <a asp-controller="Trip" asp-action="Index" class="@(currentController == "Trip" ? "active" : "")">
+                    Trips
+                </a>
+                <a asp-controller="Booking" asp-action="Index" class="@(isBookings ? "active" : "")">
+                     Bookings
+                </a>
+            </nav>
+
             <div class="sidebar-footer">
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">Logout</button>
-                </form>
+                <div class="mini-avatar">@userInitial</div>
+                <div class="who">
+                    <div class="role">Administrator</div>
+                    <div class="mail" title="@userEmail">@userEmail</div>
+                </div>
             </div>
         </aside>
     }
 
-    <div class="main-wrapper" style="@(User.Identity != null && User.Identity.IsAuthenticated ? "" : "margin-left:0;")">
+    <div class="main-wrapper" style="@(isLoggedIn ? "" : "margin-left:0;")">
 
-        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        @if (isLoggedIn)
         {
             <div class="top-header">
-                <span class="text-muted">@ViewData["Title"]</span>
-                <span class="small text-muted">@DateTime.Now.ToString("dddd, dd MMM yyyy")</span>
+                <div class="header-left">
+                    <button type="button" class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+                    <span class="page-title">@ViewData["Title"]</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <span class="date-chip d-none d-md-inline">@DateTime.UtcNow.ToString("dddd, dd MMM yyyy")</span>
+
+                    <div class="dropdown">
+                        <button class="avatar-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="@userEmail">
+                            @userInitial
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+                            <li class="profile-head">
+                                <div class="fw-semibold">Administrator</div>
+                                <div class="small text-muted">@userEmail</div>
+                            </li>
+                            <li><a class="dropdown-item" asp-controller="Dashboard" asp-action="Index">📊 Dashboard</a></li>
+                            <li><a class="dropdown-item" asp-controller="Booking" asp-action="Create">➕ New Booking</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit" class="dropdown-item text-danger">🚪 Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         }
 
@@ -190,6 +417,36 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @if (isLoggedIn)
+    {
+        <script>
+                (function() {
+                    var sidebar = document.getElementById("appSidebar");
+                    var overlay = document.getElementById("sidebarOverlay");
+                    var toggle = document.getElementById("menuToggle");
+
+                    if (!sidebar || !overlay || !toggle) return;
+
+                    function openMenu() {
+                        sidebar.classList.add("open");
+                        overlay.classList.add("show");
+                    }
+
+                    function closeMenu() {
+                        sidebar.classList.remove("open");
+                        overlay.classList.remove("show");
+                    }
+
+                    toggle.addEventListener("click", function() {
+                        sidebar.classList.contains("open") ? closeMenu() : openMenu();
+                    });
+
+                    overlay.addEventListener("click", closeMenu);
+                })();
+        </script>
+    }
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
